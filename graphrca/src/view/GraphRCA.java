@@ -32,8 +32,9 @@ public class GraphRCA {
     private JScrollPane graphicAreaScrollPane;
     private GraphData graphData;
     private JLabel similarityLabel;
-    private JScrollBar similarityScrollBar;
-    private JTextField similarityTextField;
+    private JPanel similarityFilterJPanel;
+    private JScrollBar similarityFilterScrollBar;
+    private JLabel similarityFilterJLabel;
 
     private LoadCSVToGraphController loadCSVToGraphController;
     private SetNewGraphController setNewGraphController;
@@ -68,18 +69,30 @@ public class GraphRCA {
         loadCSVButton.addActionListener( new CSVLoadDialog() );
 
         similarityLabel = new JLabel();
+        similarityLabel.setToolTipText("Similarity");
         similarityLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        similarityLabel.setFont(new Font("Arial", Font.BOLD, 32));
+        similarityLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         similarityLabel.setBackground(Color.WHITE);
         similarityLabel.setBorder(BorderFactory.createLineBorder(Color.lightGray));
         similarityLabel.setVisible(false);
 
-        similarityScrollBar = new JScrollBar(JScrollBar.HORIZONTAL, 0, 0, 0, 100);
-        BoundedRangeModel similarityScrollBarModel = similarityScrollBar.getModel();
+        similarityFilterScrollBar = new JScrollBar(JScrollBar.HORIZONTAL, 0, 0, 0, 100);
+        similarityFilterScrollBar.setPreferredSize( new Dimension(140, 20) );
+        similarityFilterScrollBar.setToolTipText("Overshadows the object rows with a similarity percentage lower than " +
+                "the selected one");
+        BoundedRangeModel similarityScrollBarModel = similarityFilterScrollBar.getModel();
         similarityScrollBarModel.addChangeListener( new SimilarityScrollBarChangeListener() );
-        similarityScrollBar.setVisible(false);
 
-        similarityTextField = new JTextField("0%");
+        similarityFilterJLabel = new JLabel("0%");
+        similarityFilterJLabel.setPreferredSize( new Dimension(40, 20) );
+
+        FlowLayout similarityFilterFlowLayout = new FlowLayout(FlowLayout.CENTER, 10, 0);
+        similarityFilterJPanel = new JPanel();
+        similarityFilterJPanel.setLayout(similarityFilterFlowLayout);
+        similarityFilterJPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        similarityFilterJPanel.add(similarityFilterScrollBar);
+        similarityFilterJPanel.add(similarityFilterJLabel);
+        similarityFilterJPanel.setVisible(false);
 
         chartViewer = new ChartViewer();
         chartViewer.setVisible(false);
@@ -90,6 +103,7 @@ public class GraphRCA {
 
         entriesScrollPane = new JScrollPane();
         entriesScrollPane.setPreferredSize(new Dimension(250, 40));
+        entriesScrollPane.setMinimumSize(new Dimension(200, 40));
         entriesScrollPane.setVisible(false);
 
         gridBagConstraints = new GridBagConstraints();
@@ -105,7 +119,7 @@ public class GraphRCA {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridheight = 1;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        frame.add(similarityScrollBar, gridBagConstraints);
+        frame.add(similarityFilterJPanel, gridBagConstraints);
 
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -124,7 +138,6 @@ public class GraphRCA {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
-        //gridBagConstraints.gridwidth = 3;
         frame.add(chartViewer, gridBagConstraints);
 
         frame.setVisible(true);
@@ -216,7 +229,7 @@ public class GraphRCA {
                 if (loadCSVToGraphController.getLoadCSVToGraphError().isEmpty()) {
                     setEntriesScrollPane(graphData.getEntries());
                     graphicAreaScrollPane.setVisible(true);
-                    similarityScrollBar.setVisible(true);
+                    similarityFilterJPanel.setVisible(true);
 
                     /**
                      * Enable 'Generate Results...' menu option
@@ -333,7 +346,7 @@ public class GraphRCA {
 
             List<Integer> filteredRows = new ArrayList<Integer>();
             for (int i  = 0; i < commonEntriesAreaPercentage.size(); ++i) {
-                if (similarityScrollBar.getValue() >= commonEntriesAreaPercentage.get(i)) {
+                if (similarityFilterScrollBar.getValue() >= commonEntriesAreaPercentage.get(i)) {
                     filteredRows.add(i);
                 }
             }
@@ -342,7 +355,7 @@ public class GraphRCA {
             JList jList = (JList)jViewport.getView();
             jList.setCellRenderer( new SimilarityFilterCellRenderer(filteredRows) );
 
-            similarityTextField.setText( similarityScrollBar.getValue() + "%" );
+            similarityFilterJLabel.setText( similarityFilterScrollBar.getValue() + "%" );
         }
     }
 
