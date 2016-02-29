@@ -1,6 +1,7 @@
 package view;
 
 import ChartDirector.ChartViewer;
+import controller.GenerateCSVController;
 import controller.LoadCSVToGraphController;
 import controller.SetNewGraphController;
 import model.GraphData;
@@ -15,6 +16,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +37,12 @@ public class GraphRCA {
 
     private LoadCSVToGraphController loadCSVToGraphController;
     private SetNewGraphController setNewGraphController;
+    private GenerateCSVController generateCSVController;
 
     public GraphRCA() {
         loadCSVToGraphController = new LoadCSVToGraphController();
         setNewGraphController = new SetNewGraphController();
+        generateCSVController = new GenerateCSVController();
         initComponents();
     }
 
@@ -64,7 +69,7 @@ public class GraphRCA {
 
         similarityLabel = new JLabel();
         similarityLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        similarityLabel.setFont(new Font("Courier", Font.BOLD, 32));
+        similarityLabel.setFont(new Font("Arial", Font.BOLD, 32));
         similarityLabel.setBackground(Color.WHITE);
         similarityLabel.setBorder(BorderFactory.createLineBorder(Color.lightGray));
         similarityLabel.setVisible(false);
@@ -143,6 +148,7 @@ public class GraphRCA {
         JMenuItem generate = new JMenuItem("Generate Results...", KeyEvent.VK_G);
         generate.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
         generate.addActionListener(new GenerateResults());
+        generate.setEnabled(false);
         fileMenu.add(generate);
 
         JMenuItem quit = new JMenuItem("Quit GraphRCA", KeyEvent.VK_Q);
@@ -211,6 +217,19 @@ public class GraphRCA {
                     setEntriesScrollPane(graphData.getEntries());
                     graphicAreaScrollPane.setVisible(true);
                     similarityScrollBar.setVisible(true);
+
+                    /**
+                     * Enable 'Generate Results...' menu option
+                     */
+                    JMenu jMenu = jMenuBar.getMenu(0);
+                    JMenuItem jMenuItem;
+                    for (int i = 0; i < jMenu.getItemCount(); ++i) {
+                        jMenuItem = jMenu.getItem(i);
+                        if (jMenuItem.getText() == "Generate Results...") {
+                            jMenuItem.setEnabled(true);
+                        }
+                    }
+
                 }
                 else {
                     JOptionPane.showMessageDialog(null, loadCSVToGraphController.getLoadCSVToGraphError(), "Error!",
@@ -226,18 +245,65 @@ public class GraphRCA {
 
     private class GenerateResults implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            JFileChooser jFileChooser = new JFileChooser();
+            JFileChooser jFileChooser = newJFileChooserWithConfirmDialog();
             FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV files (*csv)", "csv");
             jFileChooser.setFileFilter(filter);
             int rVal = jFileChooser.showSaveDialog(frame);
 
             if ( rVal == JFileChooser.APPROVE_OPTION ) {
+                File csvFile = jFileChooser.getSelectedFile();
+                String csvString = generateCSVController.generateCSVController(graphData);
+
+                PrintWriter out;
+                try {
+                    String csvFileAbsolutePath = csvFile.getAbsolutePath();
+                    if (!csvFileAbsolutePath.endsWith(".csv")) {
+                        csvFileAbsolutePath += ".csv";
+                    }
+                    out = new PrintWriter(csvFileAbsolutePath);
+                    out.println(csvString);
+                    out.close();
+                }
+                catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, "Error saving the csv file", "Error!", JOptionPane.ERROR_MESSAGE);
+                }
 
             }
             else if ( rVal == JFileChooser.CANCEL_OPTION ) {
 
             }
 
+        }
+
+        /**
+         * Instantiates a new JFileChooser with a confirm dialog when saving a new file that already exists.
+         *
+         * @return
+         */
+        private JFileChooser newJFileChooserWithConfirmDialog() {
+            return new JFileChooser(){
+                        @Override
+                        public void approveSelection(){
+                            File f = getSelectedFile();
+                            if(f.exists() && getDialogType() == SAVE_DIALOG){
+                                int result = JOptionPane.showConfirmDialog(this,"The file exists, overwrite?",
+                                        "Existing file",JOptionPane.YES_NO_CANCEL_OPTION);
+                                switch(result){
+                                    case JOptionPane.YES_OPTION:
+                                        super.approveSelection();
+                                        return;
+                                    case JOptionPane.NO_OPTION:
+                                        return;
+                                    case JOptionPane.CLOSED_OPTION:
+                                        return;
+                                    case JOptionPane.CANCEL_OPTION:
+                                        cancelSelection();
+                                        return;
+                                }
+                            }
+                            super.approveSelection();
+                        }
+                    };
         }
     }
 

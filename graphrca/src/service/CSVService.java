@@ -76,6 +76,32 @@ public class CSVService {
      */
     public String writeCSV(GraphData graphData) {
         String csv = "";
+        String newline = System.getProperty("line.separator");
+
+        List<String> labels = graphData.getLabels();
+        for (int i = 0; i < labels.size(); ++i) {
+            csv += labels.get(i) + ";";
+        }
+        csv += "Area;Common Area;Common Percentage" + newline;
+
+        List<Double> reference = graphData.getReference();
+        for (int i = 0; i < reference.size(); ++i) {
+            csv += reference.get(i) + ";";
+        }
+        csv += String.format( "%.4f", graphData.getReferenceArea() ) + ";" +
+                String.format( "%.4f", graphData.getReferenceArea() ) + ";100" + newline;
+
+        List<List<Double>> entries = graphData.getEntries();
+        List<Double> commonEntriesArea = graphData.getCommonEntriesArea();
+        List<Double> commonEntriesAreaPercentage = graphData.getCommonEntriesAreaPercentage();
+        for (int i = 0; i < entries.size(); ++i) {
+            for (int j = 0; j < entries.get(i).size(); ++j) {
+                csv += entries.get(i).get(j) + ";";
+            }
+            csv += String.format( "%.4f", graphData.getEntryArea(i) ) + ";" +
+                    String.format( "%.4f", commonEntriesArea.get(i) ) + ";" +
+                    String.format( "%.2f", commonEntriesAreaPercentage.get(i) ) + newline;
+        }
 
         return csv;
     }
