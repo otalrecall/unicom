@@ -6,7 +6,6 @@ import service.CSVService;
 import service.GraphDataService;
 import service.MultiRadarChartService;
 
-import javax.swing.*;
 import java.util.List;
 
 public class LoadCSVToGraphController {
@@ -41,7 +40,7 @@ public class LoadCSVToGraphController {
      * @param path
      * @return
      */
-    public GraphData loadCSVToGraph(ChartViewer chartViewer, JScrollPane graphicAreaScrollPane, JLabel similarityLabel, String path) {
+    public GraphData loadCSVToGraph(ChartViewer chartViewer, String path) {
         GraphData graphData = new GraphData();
 
         try {
@@ -52,8 +51,8 @@ public class LoadCSVToGraphController {
 
             String[] labels = new String[graphData.getLabels().size()];
             graphData.getLabels().toArray(labels);
-            multiRadarChartService.createChart(chartViewer, labels);
-            multiRadarChartService.compareObjects(chartViewer, graphicAreaScrollPane, similarityLabel, graphData, 0);
+            multiRadarChartService.createChart(labels);
+            multiRadarChartService.compareObjects(chartViewer, graphData, 0);
             chartViewer.setVisible(true);
         }
         catch (NumberFormatException nfe) {

@@ -5,13 +5,17 @@ import controller.GenerateCSVController;
 import controller.LoadCSVToGraphController;
 import controller.SetNewGraphController;
 import model.GraphData;
+import org.apache.commons.lang.ArrayUtils;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -71,9 +75,7 @@ public class GraphRCA {
         similarityLabel = new JLabel();
         similarityLabel.setToolTipText("Similarity");
         similarityLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        similarityLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        similarityLabel.setBackground(Color.WHITE);
-        similarityLabel.setBorder(BorderFactory.createLineBorder(Color.lightGray));
+        similarityLabel.setBorder(BorderFactory.createTitledBorder(new TitledBorder("Similarity")));
         similarityLabel.setVisible(false);
 
         similarityFilterScrollBar = new JScrollBar(JScrollBar.HORIZONTAL, 0, 0, 0, 100);
@@ -99,6 +101,8 @@ public class GraphRCA {
 
         graphicAreaScrollPane = new JScrollPane();
         graphicAreaScrollPane.setPreferredSize(new Dimension(250, 40));
+        graphicAreaScrollPane.setMinimumSize(new Dimension(250, 40));
+        graphicAreaScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         graphicAreaScrollPane.setVisible(false);
 
         entriesScrollPane = new JScrollPane();
@@ -132,7 +136,7 @@ public class GraphRCA {
 
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         frame.add(similarityLabel, gridBagConstraints);
 
         gridBagConstraints.gridx = 1;
@@ -190,23 +194,79 @@ public class GraphRCA {
      *
      * @param entries
      */
-    private void setEntriesScrollPane(List<List<Double>> entries) {
-        loadCSVButton.setVisible(false);
+    private void setEntriesScrollPane(List<String> labels, List<List<Double>> entries) {
+        String[] labelsStringArray = new String[labels.size()];
+        String[] labelsEntriesTable = (String[]) ArrayUtils.addAll( new String[]{"#"}, labels.toArray(labelsStringArray) );
 
-        Integer[] entriesIterator = new Integer[entries.size()];
-        for (int i = 0; i < entriesIterator.length; ++i) {
-            entriesIterator[i] = i + 1;
+        Object[][] dataEntriesTable = new Object[entries.size()][entries.get(0).size() + 1];
+        for (int i = 0; i < entries.size(); ++i) {
+            for (int j = 0; j < entries.get(i).size(); ++j) {
+                if (j == 0) {
+                    dataEntriesTable[i][j] = i + 1;
+                }
+                dataEntriesTable[i][j + 1] = entries.get(i).get(j);
+            }
         }
-        JList jList = new JList(entriesIterator);
-        jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jList.setLayoutOrientation(JList.VERTICAL);
-        jList.setVisibleRowCount(-1);
-        jList.addListSelectionListener(new GraphSelectionHandler());
 
-        entriesScrollPane.setViewportView(jList);
-        entriesScrollPane.setVisible(true);
-        similarityLabel.setVisible(true);
-        similarityLabel.setOpaque(true);
+        JTable entriesTable = new JTable(new CustomTableModel(dataEntriesTable, labelsEntriesTable));
+
+        entriesTable.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
+        entriesTable.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+        entriesTable.setSelectionBackground( Color.WHITE );
+        entriesTable.setSelectionForeground( Color.GRAY );
+
+        ListSelectionModel entriesTableSelectionModel = entriesTable.getSelectionModel();
+        entriesTableSelectionModel.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+        entriesTableSelectionModel.addListSelectionListener( new GraphSelectionHandler(entriesTable) );
+
+        entriesScrollPane.setViewportView(entriesTable);
+    }
+
+    private class CustomTableModel extends AbstractTableModel {
+        private String[] columnNames;
+
+        private Object[][] data;
+
+        public CustomTableModel(Object[][] data, String[] columnNames) {
+            this.columnNames = columnNames;
+            this.data = data;
+        }
+
+        public void setColumnNames(String[] columnNames) {
+            this.columnNames = columnNames;
+        }
+
+        public void setData(Object[][] data) {
+            this.data = data;
+        }
+
+        public String[] getColumnNames() {
+            return columnNames;
+        }
+
+        public Object[][] getData() {
+            return data;
+        }
+
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        public int getRowCount() {
+            return data.length;
+        }
+
+        public String getColumnName(int col) {
+            return columnNames[col];
+        }
+
+        public Object getValueAt(int row, int col) {
+            return data[row][col];
+        }
+
+        public boolean isCellEditable(int row, int col) {
+            return false;
+        }
     }
 
     private class CSVLoadDialog implements ActionListener {
@@ -220,14 +280,21 @@ public class GraphRCA {
             if (rVal == JFileChooser.APPROVE_OPTION) {
                 String filename = jFileChooser.getSelectedFile().getName();
                 String path = jFileChooser.getCurrentDirectory().toString() + "/";
-                graphData = loadCSVToGraphController.loadCSVToGraph(chartViewer, graphicAreaScrollPane, similarityLabel,
-                        path + filename);
+                graphData = loadCSVToGraphController.loadCSVToGraph(chartViewer, path + filename);
 
                 /**
                  * Load graph or show errors to the user if any
                  */
-                if (loadCSVToGraphController.getLoadCSVToGraphError().isEmpty()) {
-                    setEntriesScrollPane(graphData.getEntries());
+                if ( loadCSVToGraphController.getLoadCSVToGraphError().isEmpty() ) {
+                    setEntriesScrollPane( graphData.getLabels(), graphData.getEntries() );
+
+                    /**
+                     * Set visibility on the interface
+                     */
+                    loadCSVButton.setVisible(false);
+                    similarityLabel.setVisible(true);
+                    similarityLabel.setOpaque(true);
+                    entriesScrollPane.setVisible(true);
                     graphicAreaScrollPane.setVisible(true);
                     similarityFilterJPanel.setVisible(true);
 
@@ -243,6 +310,27 @@ public class GraphRCA {
                         }
                     }
 
+                    /**
+                     * Set area table
+                     */
+                    String[] graphicAreaTableColumnNames = {"", "Area"};
+                    Object[][] graphicAreaTableData = {
+                            {"Reference Object", String.format( "%.4f", graphData.getReferenceArea() ) },
+                            {"Selected Object", String.format( "%.4f", graphData.getEntryArea(0) ) }
+                    };
+                    JTable graphicAreaTable = new JTable( new CustomTableModel(graphicAreaTableData,
+                            graphicAreaTableColumnNames));
+                    graphicAreaScrollPane.setViewportView(graphicAreaTable);
+
+                    /**
+                     * Set similarity label
+                     */
+                    similarityLabel.setText( String.format( "%.2f", graphData.getCommonEntryAreaPercentage(0) ) + "%" );
+
+                    /**
+                     * Set similarity filter bar to 0
+                     */
+                    similarityFilterScrollBar.setValue(0);
                 }
                 else {
                     JOptionPane.showMessageDialog(null, loadCSVToGraphController.getLoadCSVToGraphError(), "Error!",
@@ -334,9 +422,35 @@ public class GraphRCA {
     }
 
     private class GraphSelectionHandler implements ListSelectionListener {
+
+        private JTable entriesTable;
+
+        public GraphSelectionHandler(JTable entriesTable) {
+            this.entriesTable = entriesTable;
+        }
+
         public void valueChanged(ListSelectionEvent e) {
-            int entryId = ((JList) e.getSource()).getSelectedIndex();
-            setNewGraphController.setNewGraph(chartViewer, graphicAreaScrollPane, similarityLabel, graphData, entryId );
+            int entryId = entriesTable.getSelectedRow();
+            setNewGraphController.setNewGraph(chartViewer, graphData, entryId );
+
+            /**
+             * Set area table
+             */
+            Object[][] graphicAreaTableData = {
+                    {"Reference Object", String.format( "%.4f", graphData.getReferenceArea() ) },
+                    {"Selected Object", String.format( "%.4f", graphData.getEntryArea(entryId) ) }
+            };
+
+            JTable graphicAreaTable = (JTable) graphicAreaScrollPane.getViewport().getView();
+            CustomTableModel graphicAreaTableModel = (CustomTableModel) graphicAreaTable.getModel();
+            graphicAreaTableModel.setData(graphicAreaTableData);
+            graphicAreaTable.setModel(graphicAreaTableModel);
+            graphicAreaScrollPane.setViewportView(graphicAreaTable);
+
+            /**
+             * Set similarity label
+             */
+            similarityLabel.setText( String.format( "%.2f", graphData.getCommonEntryAreaPercentage(entryId) ) + "%" );
         }
     }
 
@@ -352,14 +466,17 @@ public class GraphRCA {
             }
 
             JViewport jViewport = entriesScrollPane.getViewport();
-            JList jList = (JList)jViewport.getView();
-            jList.setCellRenderer( new SimilarityFilterCellRenderer(filteredRows) );
+            JTable entriesJTable = (JTable) jViewport.getView();
+            for (int i = 0; i < entriesJTable.getColumnCount(); i++) {
+                entriesJTable.getColumnModel().getColumn(i).setCellRenderer( new SimilarityFilterCellRenderer(filteredRows) );
+            }
 
             similarityFilterJLabel.setText( similarityFilterScrollBar.getValue() + "%" );
+            entriesJTable.repaint();
         }
     }
 
-    private static class SimilarityFilterCellRenderer extends DefaultListCellRenderer {
+    private static class SimilarityFilterCellRenderer extends DefaultTableCellRenderer {
 
         private List<Integer> filteredRows;
 
@@ -367,10 +484,15 @@ public class GraphRCA {
             this.filteredRows = filteredRows;
         }
 
-        public Component getListCellRendererComponent( JList list, Object value, int index, boolean isSelected, boolean cellHasFocus ) {
-            Component c = super.getListCellRendererComponent( list, value, index, isSelected, cellHasFocus );
-            if ( filteredRows.contains(index) ) {
-                c.setBackground( Color.lightGray );
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+                                                       int row, int column) {
+            Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if ( filteredRows.contains(row) ) {
+                c.setBackground( new Color(135, 206, 250) );
+            }
+            else {
+                c.setBackground( Color.WHITE );
+                table.setSelectionForeground( Color.GRAY );
             }
             return c;
         }
