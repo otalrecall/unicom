@@ -194,17 +194,23 @@ public class GraphRCA {
      *
      * @param entries
      */
-    private void setEntriesScrollPane(List<String> labels, List<List<Double>> entries) {
+    private void setEntriesScrollPane(List<String> labels, List<Double> reference, List<List<Double>> entries) {
         String[] labelsStringArray = new String[labels.size()];
         String[] labelsEntriesTable = (String[]) ArrayUtils.addAll( new String[]{"#"}, labels.toArray(labelsStringArray) );
 
-        Object[][] dataEntriesTable = new Object[entries.size()][entries.get(0).size() + 1];
+        Object[][] dataEntriesTable = new Object[entries.size() + 1][entries.get(0).size() + 1];
+        for (int i = 0; i < reference.size(); ++i) {
+            if (i == 0) {
+                dataEntriesTable[0][0] = 0;
+            }
+            dataEntriesTable[0][i + 1] = reference.get(i);
+        }
         for (int i = 0; i < entries.size(); ++i) {
             for (int j = 0; j < entries.get(i).size(); ++j) {
                 if (j == 0) {
-                    dataEntriesTable[i][j] = i + 1;
+                    dataEntriesTable[i + 1][j] = i + 1;
                 }
-                dataEntriesTable[i][j + 1] = entries.get(i).get(j);
+                dataEntriesTable[i + 1][j + 1] = entries.get(i).get(j);
             }
         }
 
@@ -286,7 +292,7 @@ public class GraphRCA {
                  * Load graph or show errors to the user if any
                  */
                 if ( loadCSVToGraphController.getLoadCSVToGraphError().isEmpty() ) {
-                    setEntriesScrollPane( graphData.getLabels(), graphData.getEntries() );
+                    setEntriesScrollPane( graphData.getLabels(), graphData.getReference(), graphData.getEntries() );
 
                     /**
                      * Set visibility on the interface
@@ -431,14 +437,22 @@ public class GraphRCA {
 
         public void valueChanged(ListSelectionEvent e) {
             int entryId = entriesTable.getSelectedRow();
-            setNewGraphController.setNewGraph(chartViewer, graphData, entryId );
+
+            setNewGraphController.setNewGraph(chartViewer, graphData, entryId);
 
             /**
              * Set area table
              */
+            double selectedObjectArea;
+            if ( entryId == 0 ) {
+                selectedObjectArea = graphData.getReferenceArea();
+            }
+            else {
+                selectedObjectArea = graphData.getEntryArea(entryId - 1);
+            }
             Object[][] graphicAreaTableData = {
-                    {"Reference Object", String.format( "%.4f", graphData.getReferenceArea() ) },
-                    {"Selected Object", String.format( "%.4f", graphData.getEntryArea(entryId) ) }
+                    {"Reference Object", String.format("%.4f", graphData.getReferenceArea())},
+                    {"Selected Object", String.format("%.4f", selectedObjectArea)}
             };
 
             JTable graphicAreaTable = (JTable) graphicAreaScrollPane.getViewport().getView();
@@ -450,7 +464,12 @@ public class GraphRCA {
             /**
              * Set similarity label
              */
-            similarityLabel.setText( String.format( "%.2f", graphData.getCommonEntryAreaPercentage(entryId) ) + "%" );
+            if (entryId == 0) {
+                similarityLabel.setText("100%");
+            }
+            else {
+                similarityLabel.setText(String.format("%.2f", graphData.getCommonEntryAreaPercentage(entryId - 1)) + "%");
+            }
         }
     }
 
@@ -461,8 +480,15 @@ public class GraphRCA {
             List<Integer> filteredRows = new ArrayList<Integer>();
             for (int i  = 0; i < commonEntriesAreaPercentage.size(); ++i) {
                 if (similarityFilterScrollBar.getValue() >= commonEntriesAreaPercentage.get(i)) {
-                    filteredRows.add(i);
+                    filteredRows.add(i + 1);
                 }
+            }
+
+            /**
+             * Set filtered row for the reference object
+             */
+            if ( similarityFilterScrollBar.getValue() == 100 ) {
+                filteredRows.add(0);
             }
 
             JViewport jViewport = entriesScrollPane.getViewport();

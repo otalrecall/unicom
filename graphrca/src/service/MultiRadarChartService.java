@@ -47,7 +47,13 @@ public class MultiRadarChartService {
      */
     public void compareObjects(ChartViewer chartViewer, GraphData graphData, int entryId) {
         double[] reference = graphData.getReferenceToDouble();
-        double[] entry = graphData.getEntryToDouble(entryId);
+        double[] entry;
+        if (entryId != 0) {
+            entry = graphData.getEntryToDouble(entryId - 1);
+        }
+        else {
+            entry = reference;
+        }
 
         polarChart.removeDynamicLayer();
         polarChart.addAreaLayer(reference, 0x806666cc, "Reference Object");
