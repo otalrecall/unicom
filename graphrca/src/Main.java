@@ -1,7 +1,7 @@
-import view.GraphRCA;
+import view.UniCom;
 
 public class Main {
     public static void main(String[] args) {
-        new GraphRCA();
+        new UniCom();
     }
 }

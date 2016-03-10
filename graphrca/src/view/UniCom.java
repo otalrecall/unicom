@@ -25,7 +25,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraphRCA {
+public class UniCom {
 
     private JFrame frame;
     private GridBagConstraints gridBagConstraints;
@@ -44,7 +44,7 @@ public class GraphRCA {
     private SetNewGraphController setNewGraphController;
     private GenerateCSVController generateCSVController;
 
-    public GraphRCA() {
+    public UniCom() {
         loadCSVToGraphController = new LoadCSVToGraphController();
         setNewGraphController = new SetNewGraphController();
         generateCSVController = new GenerateCSVController();
@@ -61,7 +61,7 @@ public class GraphRCA {
          * Set main window configuration
          */
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("GraphRCA");
+        frame.setTitle("UniCom");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setMinimumSize(new Dimension(300, 300));
         frame.setLocationRelativeTo(null);
@@ -168,9 +168,9 @@ public class GraphRCA {
         generate.setEnabled(false);
         fileMenu.add(generate);
 
-        JMenuItem quit = new JMenuItem("Quit GraphRCA", KeyEvent.VK_Q);
+        JMenuItem quit = new JMenuItem("Quit UniCom", KeyEvent.VK_Q);
         quit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
-        quit.addActionListener(new QuitGraphRCA());
+        quit.addActionListener(new QuitUniCom());
         fileMenu.add(quit);
 
         JMenu helpMenu = new JMenu("Help");
@@ -183,7 +183,7 @@ public class GraphRCA {
 
         JMenuItem about = new JMenuItem("About", KeyEvent.VK_A);
         about.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
-        about.addActionListener(new AboutGraphRCA());
+        about.addActionListener(new AboutUniCom());
         helpMenu.add(about);
 
         frame.setJMenuBar(jMenuBar);
@@ -414,15 +414,15 @@ public class GraphRCA {
         }
     }
 
-    private class QuitGraphRCA implements ActionListener {
+    private class QuitUniCom implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
         }
     }
 
-    private class AboutGraphRCA implements ActionListener {
+    private class AboutUniCom implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, "GraphRCA by Daniel Otal Rodríguez. 2016", "About",
+            JOptionPane.showMessageDialog(null, "UniCom by Daniel Otal Rodríguez. 2016", "About",
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
