@@ -289,12 +289,13 @@ public class UniCom {
             if (rVal == JFileChooser.APPROVE_OPTION) {
                 String filename = jFileChooser.getSelectedFile().getName();
                 String path = jFileChooser.getCurrentDirectory().toString() + "/";
-                graphData = loadCSVToGraphController.loadCSVToGraph(chartViewer, path + filename);
+                GraphData graphDataTemp = loadCSVToGraphController.loadCSVToGraph(chartViewer, path + filename);
 
                 /**
                  * Load graph or show errors to the user if any
                  */
                 if ( loadCSVToGraphController.getLoadCSVToGraphError().isEmpty() ) {
+                    graphData = graphDataTemp;
                     setEntriesScrollPane( graphData.getLabels(), graphData.getReference(), graphData.getEntries() );
 
                     /**

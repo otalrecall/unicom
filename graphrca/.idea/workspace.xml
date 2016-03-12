@@ -7,16 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7489d312-4d0c-49b9-8566-83ba949684fa" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$AboutGraphRCA.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$CSVLoadDialog.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$GenerateResults.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$GraphSelectionHandler.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$QuitGraphRCA.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$SimilarityFilterCellRenderer.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$SimilarityScrollBarChangeListener.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/Main.class" afterPath="$PROJECT_DIR$/out/production/graphrca/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/UniCom.java" afterPath="$PROJECT_DIR$/src/view/UniCom.java" />
     </list>
@@ -43,8 +33,8 @@
       <file leaf-file-name="UniCom.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/UniCom.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="9.478528">
-              <caret line="206" column="43" selection-start-line="206" selection-start-column="43" selection-end-line="206" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.81595093">
+              <caret line="300" column="23" selection-start-line="300" selection-start-column="23" selection-end-line="300" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,12 +89,9 @@
         <entry file="file://$PROJECT_DIR$/src/model/GraphData.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+              <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2812#2813#0" expanded="true" />
-                <element signature="e#2859#2860#0" expanded="true" />
-                <element signature="e#3107#3108#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -114,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/src/controller/SetNewGraphController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+              <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -722,12 +709,18 @@
       <option name="project" value="LOCAL" />
       <updated>1457627797408</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Show decimals only when necessary in the entries table">
+      <created>1457812389505</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1457812389505</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="34" width="1279" height="686" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -739,7 +732,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38249594" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25097734" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25097734" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3273906" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -795,7 +788,8 @@
     <MESSAGE value="Add table with all the csv data on the entries pane" />
     <MESSAGE value="Add reference object to the entries table" />
     <MESSAGE value="Change program name to UniCom" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change program name to UniCom" />
+    <MESSAGE value="Show decimals only when necessary in the entries table" />
+    <option name="LAST_COMMIT_MESSAGE" value="Show decimals only when necessary in the entries table" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -824,9 +818,6 @@
           <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2812#2813#0" expanded="true" />
-            <element signature="e#2859#2860#0" expanded="true" />
-            <element signature="e#3107#3108#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -857,9 +848,6 @@
           <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2812#2813#0" expanded="true" />
-            <element signature="e#2859#2860#0" expanded="true" />
-            <element signature="e#3107#3108#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -928,9 +916,6 @@
           <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2812#2813#0" expanded="true" />
-            <element signature="e#2859#2860#0" expanded="true" />
-            <element signature="e#3107#3108#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -992,9 +977,6 @@
           <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2812#2813#0" expanded="true" />
-            <element signature="e#2859#2860#0" expanded="true" />
-            <element signature="e#3107#3108#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1209,33 +1191,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/SetNewGraphController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/service/MultiRadarChartService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="51" column="58" selection-start-line="51" selection-start-column="58" selection-end-line="51" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/GraphData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2812#2813#0" expanded="true" />
-            <element signature="e#2859#2860#0" expanded="true" />
-            <element signature="e#3107#3108#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1251,10 +1212,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/GraphData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/SetNewGraphController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/UniCom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="9.478528">
-          <caret line="206" column="43" selection-start-line="206" selection-start-column="43" selection-end-line="206" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.81595093">
+          <caret line="300" column="23" selection-start-line="300" selection-start-column="23" selection-end-line="300" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
