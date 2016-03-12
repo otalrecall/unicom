@@ -7,10 +7,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7489d312-4d0c-49b9-8566-83ba949684fa" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/view/GraphRCA.java" afterPath="$PROJECT_DIR$/src/view/UniCom.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/service/MultiRadarChartService.class" afterPath="$PROJECT_DIR$/out/production/graphrca/service/MultiRadarChartService.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$AboutGraphRCA.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$CSVLoadDialog.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$GenerateResults.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$GraphSelectionHandler.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$QuitGraphRCA.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$SimilarityFilterCellRenderer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA$SimilarityScrollBarChangeListener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/graphrca/view/GraphRCA.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/Main.class" afterPath="$PROJECT_DIR$/out/production/graphrca/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/UniCom.java" afterPath="$PROJECT_DIR$/src/view/UniCom.java" />
     </list>
     <ignored path="graphrca.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,8 +43,8 @@
       <file leaf-file-name="UniCom.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/UniCom.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.5858896">
-              <caret line="439" column="0" selection-start-line="439" selection-start-column="0" selection-end-line="439" selection-end-column="0" />
+            <state vertical-scroll-proportion="9.478528">
+              <caret line="206" column="43" selection-start-line="206" selection-start-column="43" selection-end-line="206" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -225,10 +233,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="graphrca" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -712,12 +716,18 @@
       <option name="project" value="LOCAL" />
       <updated>1457567231577</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Change program name to UniCom">
+      <created>1457627797408</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1457627797408</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="34" width="1279" height="686" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -729,7 +739,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38249594" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25097734" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25097734" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3273906" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -784,7 +794,8 @@
     <MESSAGE value="Add jar artifact, add label for similarity filter" />
     <MESSAGE value="Add table with all the csv data on the entries pane" />
     <MESSAGE value="Add reference object to the entries table" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add reference object to the entries table" />
+    <MESSAGE value="Change program name to UniCom" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change program name to UniCom" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1242,8 +1253,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/UniCom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5858896">
-          <caret line="439" column="0" selection-start-line="439" selection-start-column="0" selection-end-line="439" selection-end-column="0" />
+        <state vertical-scroll-proportion="9.478528">
+          <caret line="206" column="43" selection-start-line="206" selection-start-column="43" selection-end-line="206" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

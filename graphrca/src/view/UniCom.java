@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -198,19 +200,20 @@ public class UniCom {
         String[] labelsStringArray = new String[labels.size()];
         String[] labelsEntriesTable = (String[]) ArrayUtils.addAll( new String[]{"#"}, labels.toArray(labelsStringArray) );
 
+        NumberFormat numberFormat = new DecimalFormat("##.####");
         Object[][] dataEntriesTable = new Object[entries.size() + 1][entries.get(0).size() + 1];
         for (int i = 0; i < reference.size(); ++i) {
             if (i == 0) {
                 dataEntriesTable[0][0] = 0;
             }
-            dataEntriesTable[0][i + 1] = reference.get(i);
+            dataEntriesTable[0][i + 1] = numberFormat.format(reference.get(i));
         }
         for (int i = 0; i < entries.size(); ++i) {
             for (int j = 0; j < entries.get(i).size(); ++j) {
                 if (j == 0) {
                     dataEntriesTable[i + 1][j] = i + 1;
                 }
-                dataEntriesTable[i + 1][j + 1] = entries.get(i).get(j);
+                dataEntriesTable[i + 1][j + 1] = numberFormat.format(entries.get(i).get(j));
             }
         }
 
