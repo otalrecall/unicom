@@ -1,9 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="graphrca:jar">
+  <artifact type="jar" build-on-make="true" name="graphrca:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/graphrca_jar</output-path>
     <root id="archive" name="graphrca.jar">
       <element id="module-output" name="graphrca" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/chartdir_java/WEB-INF/lib/ChartDirector.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/commons-lang-2.6/commons-lang-2.6.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

@@ -21,7 +21,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -181,6 +186,7 @@ public class UniCom {
 
         JMenuItem manual = new JMenuItem("Manual", KeyEvent.VK_M);
         manual.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+        manual.addActionListener(new OpenManual());
         helpMenu.add(manual);
 
         JMenuItem about = new JMenuItem("About", KeyEvent.VK_A);
@@ -421,6 +427,27 @@ public class UniCom {
     private class QuitUniCom implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
+        }
+    }
+
+    private class OpenManual implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            try {
+                String inputPdf = "resources/manual.pdf";
+                Path tempOutput = Files.createTempFile("TempManual", ".pdf");
+                tempOutput.toFile().deleteOnExit();
+                try ( InputStream is = UniCom.class.getClassLoader().getResourceAsStream(inputPdf) ) {
+                    Files.copy(is, tempOutput, StandardCopyOption.REPLACE_EXISTING);
+                }
+                if ( Desktop.isDesktopSupported() ) {
+                    Desktop dTop = Desktop.getDesktop();
+                    if ( dTop.isSupported(Desktop.Action.OPEN) ) {
+                        dTop.open( tempOutput.toFile() );
+                    }
+                }
+            } catch (IOException ex) {
+
+            }
         }
     }
 
