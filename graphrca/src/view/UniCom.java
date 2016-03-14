@@ -74,6 +74,14 @@ public class UniCom {
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridBagLayout());
 
+        /**
+         * Set program icon
+         */
+        java.net.URL url = ClassLoader.getSystemResource("resources/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image icon = kit.createImage(url);
+        frame.setIconImage(icon);
+
         initMenu();
 
         loadCSVButton = new JButton("Load CSV File");
