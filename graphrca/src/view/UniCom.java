@@ -8,6 +8,7 @@ import model.GraphData;
 import org.apache.commons.lang.ArrayUtils;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -42,6 +43,13 @@ public class UniCom {
     private JScrollPane entriesScrollPane;
     private JScrollPane graphicAreaScrollPane;
     private GraphData graphData;
+    private JPanel selectOrderControlJPanel;
+    private JRadioButton naturalOrderJRadioButton;
+    private JRadioButton owaOrderJRadioButton;
+    private JPanel controlPanelJPanel;
+    private JPanel selectEntryControlJPanel;
+    private JRadioButton referenceObjectJRadioButton;
+    private JRadioButton compareObjectJRadioButton;
     private JLabel similarityLabel;
     private JPanel similarityFilterJPanel;
     private JScrollBar similarityFilterScrollBar;
@@ -103,20 +111,57 @@ public class UniCom {
         similarityFilterJLabel = new JLabel("0%");
         similarityFilterJLabel.setPreferredSize( new Dimension(40, 20) );
 
-        FlowLayout similarityFilterFlowLayout = new FlowLayout(FlowLayout.CENTER, 10, 0);
+        naturalOrderJRadioButton = new JRadioButton("Natural");
+        naturalOrderJRadioButton.setSelected(true);
+        owaOrderJRadioButton = new JRadioButton("OWA");
+
+        ButtonGroup selectOrderButtonGroup = new ButtonGroup();
+        selectOrderButtonGroup.add(naturalOrderJRadioButton);
+        selectOrderButtonGroup.add(owaOrderJRadioButton);
+
+        selectOrderControlJPanel = new JPanel();
+        selectOrderControlJPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        selectOrderControlJPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        selectOrderControlJPanel.setBorder(BorderFactory.createTitledBorder("Chart Axis Order"));
+        selectOrderControlJPanel.add(naturalOrderJRadioButton);
+        selectOrderControlJPanel.add(owaOrderJRadioButton);
+
+        compareObjectJRadioButton = new JRadioButton("Compare Object");
+        compareObjectJRadioButton.setSelected(true);
+        referenceObjectJRadioButton = new JRadioButton("Reference Object");
+
+        ButtonGroup selectEntryButtonGroup = new ButtonGroup();
+        selectEntryButtonGroup.add(referenceObjectJRadioButton);
+        selectEntryButtonGroup.add(compareObjectJRadioButton);
+
+        selectEntryControlJPanel = new JPanel();
+        selectEntryControlJPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        selectEntryControlJPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        selectEntryControlJPanel.setBorder(BorderFactory.createTitledBorder("Item Selection"));
+        selectEntryControlJPanel.add(compareObjectJRadioButton);
+        selectEntryControlJPanel.add(referenceObjectJRadioButton);
+
         similarityFilterJPanel = new JPanel();
-        similarityFilterJPanel.setLayout(similarityFilterFlowLayout);
+        similarityFilterJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
         similarityFilterJPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        similarityFilterJPanel.setBorder(BorderFactory.createTitledBorder("Similarity Filter"));
         similarityFilterJPanel.add(similarityFilterScrollBar);
         similarityFilterJPanel.add(similarityFilterJLabel);
-        similarityFilterJPanel.setVisible(false);
+
+        controlPanelJPanel = new JPanel();
+        controlPanelJPanel.setLayout(new BoxLayout(controlPanelJPanel, BoxLayout.Y_AXIS));
+        controlPanelJPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+        controlPanelJPanel.add(selectOrderControlJPanel);
+        controlPanelJPanel.add(selectEntryControlJPanel);
+        controlPanelJPanel.add(similarityFilterJPanel);
+        controlPanelJPanel.setVisible(false);
 
         chartViewer = new ChartViewer();
         chartViewer.setVisible(false);
 
         graphicAreaScrollPane = new JScrollPane();
-        graphicAreaScrollPane.setPreferredSize(new Dimension(250, 40));
-        graphicAreaScrollPane.setMinimumSize(new Dimension(250, 40));
+        graphicAreaScrollPane.setPreferredSize(new Dimension(250, 60));
+        graphicAreaScrollPane.setMinimumSize(new Dimension(250, 60));
         graphicAreaScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         graphicAreaScrollPane.setVisible(false);
 
@@ -130,28 +175,32 @@ public class UniCom {
 
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.gridheight = 1;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         frame.add(entriesScrollPane, gridBagConstraints);
 
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = 1;
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
-        frame.add(similarityFilterJPanel, gridBagConstraints);
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        frame.add(controlPanelJPanel, gridBagConstraints);
 
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.weightx = 1;
         gridBagConstraints.weighty = 1;
+        gridBagConstraints.gridheight = 1;
         gridBagConstraints.fill = GridBagConstraints.NONE;
         frame.add(loadCSVButton, gridBagConstraints);
-        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = GridBagConstraints.NORTH;
         frame.add(graphicAreaScrollPane, gridBagConstraints);
 
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridheight = 1;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = GridBagConstraints.CENTER;
         frame.add(similarityLabel, gridBagConstraints);
 
         gridBagConstraints.gridx = 1;
@@ -320,7 +369,7 @@ public class UniCom {
                     similarityLabel.setOpaque(true);
                     entriesScrollPane.setVisible(true);
                     graphicAreaScrollPane.setVisible(true);
-                    similarityFilterJPanel.setVisible(true);
+                    controlPanelJPanel.setVisible(true);
 
                     /**
                      * Enable 'Generate Results...' menu option
@@ -344,6 +393,7 @@ public class UniCom {
                     };
                     JTable graphicAreaTable = new JTable( new CustomTableModel(graphicAreaTableData,
                             graphicAreaTableColumnNames));
+                    graphicAreaTable.setRowSelectionAllowed(false);
                     graphicAreaScrollPane.setViewportView(graphicAreaTable);
 
                     /**
