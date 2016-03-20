@@ -284,6 +284,7 @@ public class UniCom {
 
         entriesTable.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
         entriesTable.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+        entriesTable.getTableHeader().setReorderingAllowed(false);
         entriesTable.setSelectionBackground( Color.WHITE );
         entriesTable.setSelectionForeground( Color.GRAY );
 
@@ -394,6 +395,7 @@ public class UniCom {
                     JTable graphicAreaTable = new JTable( new CustomTableModel(graphicAreaTableData,
                             graphicAreaTableColumnNames));
                     graphicAreaTable.setRowSelectionAllowed(false);
+                    graphicAreaTable.getTableHeader().setReorderingAllowed(false);
                     graphicAreaScrollPane.setViewportView(graphicAreaTable);
 
                     /**
