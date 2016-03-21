@@ -26,7 +26,7 @@ public class MultiRadarChartService {
         double screenSizeWidth = screenSize.getWidth();
         double screenSizeHeight = screenSize.getHeight();
 
-        polarChart = new PolarChart((int) (screenSizeWidth/1.3), (int) (screenSizeHeight/1.75), Chart.goldColor(),
+        polarChart = new PolarChart((int) (screenSizeWidth/1.3), (int) (screenSizeHeight/1.75), Chart.silverColor(),
                 0x000000, 1);
         polarChart.addTitle("Radar Chart", "Times New Roman Bold Italic", 15, 0xffffff).setBackground(0x000080);
 

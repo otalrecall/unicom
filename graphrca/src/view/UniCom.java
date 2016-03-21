@@ -98,7 +98,9 @@ public class UniCom {
         similarityLabel = new JLabel();
         similarityLabel.setToolTipText("Similarity");
         similarityLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        similarityLabel.setBorder(BorderFactory.createTitledBorder(new TitledBorder("Similarity")));
+        TitledBorder similarityTitleBorder = BorderFactory.createTitledBorder("Similarity");
+        similarityTitleBorder.setTitleJustification(TitledBorder.CENTER);
+        similarityLabel.setBorder( similarityTitleBorder );
         similarityLabel.setVisible(false);
 
         similarityFilterScrollBar = new JScrollBar(JScrollBar.HORIZONTAL, 0, 0, 0, 100);
