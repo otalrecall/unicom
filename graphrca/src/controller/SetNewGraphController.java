@@ -2,6 +2,7 @@ package controller;
 
 import ChartDirector.ChartViewer;
 import model.GraphData;
+import service.GraphDataService;
 import service.MultiRadarChartService;
 
 import javax.swing.*;
@@ -9,16 +10,16 @@ import javax.swing.*;
 public class SetNewGraphController {
 
     private MultiRadarChartService multiRadarChartService;
+    private GraphDataService graphDataService;
 
     public SetNewGraphController() {
-        multiRadarChartService = new MultiRadarChartService();
+        graphDataService = new GraphDataService();
+        multiRadarChartService = new MultiRadarChartService(graphDataService);
     }
 
-    public void setNewGraph(ChartViewer chartViewer, GraphData graphData, int entryId) {
-        String[] labels = new String[graphData.getLabels().size()];
-        graphData.getLabels().toArray(labels);
-        multiRadarChartService.createChart(labels);
-        multiRadarChartService.compareObjects(chartViewer, graphData, entryId);
+    public void setNewGraph(ChartViewer chartViewer, GraphData graphData, boolean isNaturalChartAxisOrder, int entryId) {
+        multiRadarChartService.createChart();
+        multiRadarChartService.compareObjects(chartViewer, graphData, isNaturalChartAxisOrder, entryId);
     }
 
 }

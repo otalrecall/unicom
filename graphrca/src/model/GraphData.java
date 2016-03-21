@@ -14,10 +14,17 @@ public class GraphData {
     private List<Double> commonEntriesArea;
     private List<Double> commonEntriesAreaPercentage;
 
+    private List<Integer> owaOrder;
+
+    private double referenceOwaArea;
+    private List<Double> entriesOwaArea;
+    private List<Double> commonEntriesOwaArea;
+    private List<Double> commonEntriesOwaAreaPercentage;
+
     public GraphData() {
-        labels = new ArrayList<String>();
-        reference = new ArrayList<Double>();
-        entries = new ArrayList<List<Double>>();
+        labels = new ArrayList<>();
+        reference = new ArrayList<>();
+        entries = new ArrayList<>();
     }
 
     public List<String> getLabels() {
@@ -72,6 +79,46 @@ public class GraphData {
         return commonEntriesAreaPercentage;
     }
 
+    public List<Integer> getOwaOrder() {
+        return owaOrder;
+    }
+
+    public void setOwaOrder(List<Integer> owaOrder) {
+        this.owaOrder = owaOrder;
+    }
+
+    public double getReferenceOwaArea() {
+        return referenceOwaArea;
+    }
+
+    public void setReferenceOwaArea(double referenceOwaArea) {
+        this.referenceOwaArea = referenceOwaArea;
+    }
+
+    public List<Double> getEntriesOwaArea() {
+        return entriesOwaArea;
+    }
+
+    public void setEntriesOwaArea(List<Double> entriesOwaArea) {
+        this.entriesOwaArea = entriesOwaArea;
+    }
+
+    public List<Double> getCommonEntriesOwaArea() {
+        return commonEntriesOwaArea;
+    }
+
+    public void setCommonEntriesOwaArea(List<Double> commonEntriesOwaArea) {
+        this.commonEntriesOwaArea = commonEntriesOwaArea;
+    }
+
+    public List<Double> getCommonEntriesOwaAreaPercentage() {
+        return commonEntriesOwaAreaPercentage;
+    }
+
+    public void setCommonEntriesOwaAreaPercentage(List<Double> commonEntriesOwaAreaPercentage) {
+        this.commonEntriesOwaAreaPercentage = commonEntriesOwaAreaPercentage;
+    }
+
     public void setCommonEntriesAreaPercentage(List<Double> commonEntriesAreaPercentage) {
         this.commonEntriesAreaPercentage = commonEntriesAreaPercentage;
     }
@@ -114,6 +161,36 @@ public class GraphData {
     }
 
     /**
+     * Gets the OWA area of a given entry id
+     *
+     * @param entryId
+     * @return
+     */
+    public double getEntryOwaArea(int entryId) {
+        return entriesOwaArea.get(entryId);
+    }
+
+    /**
+     * Gets the common area of a given entry id
+     *
+     * @param entryId
+     * @return
+     */
+    public double getCommonEntryArea(int entryId) {
+        return commonEntriesArea.get(entryId);
+    }
+
+    /**
+     * Gets the common OWA area of a given entry id
+     *
+     * @param entryId
+     * @return
+     */
+    public double getCommonEntryOwaArea(int entryId) {
+        return commonEntriesOwaArea.get(entryId);
+    }
+
+    /**
      * Gets the percentage of common area of a given entry id
      *
      * @param entryId
@@ -121,5 +198,15 @@ public class GraphData {
      */
     public double getCommonEntryAreaPercentage(int entryId) {
         return commonEntriesAreaPercentage.get(entryId);
+    }
+
+    /**
+     * Gets the percentage of common OWA area of a given entry id
+     *
+     * @param entryId
+     * @return
+     */
+    public double getCommonEntryOwaAreaPercentage(int entryId) {
+        return commonEntriesOwaAreaPercentage.get(entryId);
     }
 }

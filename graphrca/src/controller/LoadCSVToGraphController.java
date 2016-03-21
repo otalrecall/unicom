@@ -16,9 +16,9 @@ public class LoadCSVToGraphController {
     private String loadCSVToGraphError;
 
     public LoadCSVToGraphController() {
-        multiRadarChartService = new MultiRadarChartService();
         csvService = new CSVService();
         graphDataService = new GraphDataService();
+        multiRadarChartService = new MultiRadarChartService(graphDataService);
         loadCSVToGraphError = "";
     }
 
@@ -47,12 +47,12 @@ public class LoadCSVToGraphController {
             List<List<String>> entries = csvService.readCSV(path);
             graphData = csvService.formatGraphData(entries);
 
+            graphDataService.calculateOwaOrder(graphData);
             graphDataService.calculateAreaData(graphData);
+            graphDataService.calculateOwaAreaData(graphData);
 
-            String[] labels = new String[graphData.getLabels().size()];
-            graphData.getLabels().toArray(labels);
-            multiRadarChartService.createChart(labels);
-            multiRadarChartService.compareObjects(chartViewer, graphData, 0);
+            multiRadarChartService.createChart();
+            multiRadarChartService.compareObjects(chartViewer, graphData, true, 0);
             chartViewer.setVisible(true);
         }
         catch (NumberFormatException nfe) {

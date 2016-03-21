@@ -113,7 +113,9 @@ public class UniCom {
 
         naturalOrderJRadioButton = new JRadioButton("Natural");
         naturalOrderJRadioButton.setSelected(true);
+        naturalOrderJRadioButton.addActionListener( new OrderSelectionRadioListener() );
         owaOrderJRadioButton = new JRadioButton("OWA");
+        owaOrderJRadioButton.addActionListener( new OrderSelectionRadioListener() );
 
         ButtonGroup selectOrderButtonGroup = new ButtonGroup();
         selectOrderButtonGroup.add(naturalOrderJRadioButton);
@@ -160,8 +162,6 @@ public class UniCom {
         chartViewer.setVisible(false);
 
         graphicAreaScrollPane = new JScrollPane();
-        graphicAreaScrollPane.setPreferredSize(new Dimension(250, 60));
-        graphicAreaScrollPane.setMinimumSize(new Dimension(250, 60));
         graphicAreaScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         graphicAreaScrollPane.setVisible(false);
 
@@ -259,24 +259,18 @@ public class UniCom {
      *
      * @param entries
      */
-    private void setEntriesScrollPane(List<String> labels, List<Double> reference, List<List<Double>> entries) {
+    private void setEntriesScrollPane(List<String> labels, List<List<Double>> entries) {
         String[] labelsStringArray = new String[labels.size()];
         String[] labelsEntriesTable = (String[]) ArrayUtils.addAll( new String[]{"#"}, labels.toArray(labelsStringArray) );
 
         NumberFormat numberFormat = new DecimalFormat("##.####");
-        Object[][] dataEntriesTable = new Object[entries.size() + 1][entries.get(0).size() + 1];
-        for (int i = 0; i < reference.size(); ++i) {
-            if (i == 0) {
-                dataEntriesTable[0][0] = 0;
-            }
-            dataEntriesTable[0][i + 1] = numberFormat.format(reference.get(i));
-        }
+        Object[][] dataEntriesTable = new Object[entries.size()][entries.get(0).size() + 1];
         for (int i = 0; i < entries.size(); ++i) {
             for (int j = 0; j < entries.get(i).size(); ++j) {
                 if (j == 0) {
-                    dataEntriesTable[i + 1][j] = i + 1;
+                    dataEntriesTable[i][j] = i + 1;
                 }
-                dataEntriesTable[i + 1][j + 1] = numberFormat.format(entries.get(i).get(j));
+                dataEntriesTable[i][j + 1] = numberFormat.format( entries.get(i).get(j) );
             }
         }
 
@@ -287,10 +281,11 @@ public class UniCom {
         entriesTable.getTableHeader().setReorderingAllowed(false);
         entriesTable.setSelectionBackground( Color.WHITE );
         entriesTable.setSelectionForeground( Color.GRAY );
+        entriesTable.setRowSelectionInterval(0, 0);
 
         ListSelectionModel entriesTableSelectionModel = entriesTable.getSelectionModel();
         entriesTableSelectionModel.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
-        entriesTableSelectionModel.addListSelectionListener( new GraphSelectionHandler(entriesTable) );
+        entriesTableSelectionModel.addListSelectionListener( new GraphSelectionHandler() );
 
         entriesScrollPane.setViewportView(entriesTable);
     }
@@ -360,7 +355,7 @@ public class UniCom {
                  */
                 if ( loadCSVToGraphController.getLoadCSVToGraphError().isEmpty() ) {
                     graphData = graphDataTemp;
-                    setEntriesScrollPane( graphData.getLabels(), graphData.getReference(), graphData.getEntries() );
+                    setEntriesScrollPane( graphData.getLabels(), graphData.getEntries() );
 
                     /**
                      * Set visibility on the interface
@@ -390,13 +385,23 @@ public class UniCom {
                     String[] graphicAreaTableColumnNames = {"", "Area"};
                     Object[][] graphicAreaTableData = {
                             {"Reference Object", String.format( "%.4f", graphData.getReferenceArea() ) },
-                            {"Selected Object", String.format( "%.4f", graphData.getEntryArea(0) ) }
+                            {"Compare Object", String.format( "%.4f", graphData.getEntryArea(0) ) },
+                            {"Shared", String.format( "%.4f", graphData.getCommonEntryArea(0) ) }
                     };
                     JTable graphicAreaTable = new JTable( new CustomTableModel(graphicAreaTableData,
                             graphicAreaTableColumnNames));
                     graphicAreaTable.setRowSelectionAllowed(false);
                     graphicAreaTable.getTableHeader().setReorderingAllowed(false);
                     graphicAreaScrollPane.setViewportView(graphicAreaTable);
+
+                    /**
+                     * Set dimension of graphicAreaScrollPane from the dimension of the table
+                     */
+                    Dimension graphicAreaTablePreferredSize = graphicAreaTable.getPreferredSize();
+                    graphicAreaScrollPane.setPreferredSize( new Dimension(graphicAreaTablePreferredSize.width,
+                            graphicAreaTable.getRowHeight()*4 + 5) );
+                    graphicAreaScrollPane.setMinimumSize( new Dimension(graphicAreaTablePreferredSize.width,
+                            graphicAreaTable.getRowHeight()*4 + 5) );
 
                     /**
                      * Set similarity label
@@ -407,6 +412,12 @@ public class UniCom {
                      * Set similarity filter bar to 0
                      */
                     similarityFilterScrollBar.setValue(0);
+
+                    /**
+                     * Set chart axis order to 'Natural' and selector to 'Compare Object'
+                     */
+                    naturalOrderJRadioButton.setSelected(true);
+                    compareObjectJRadioButton.setSelected(true);
                 }
                 else {
                     JOptionPane.showMessageDialog(null, loadCSVToGraphController.getLoadCSVToGraphError(), "Error!",
@@ -484,13 +495,13 @@ public class UniCom {
         }
     }
 
-    private class QuitUniCom implements ActionListener {
+    private static class QuitUniCom implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
         }
     }
 
-    private class OpenManual implements ActionListener {
+    private static class OpenManual implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             try {
                 String inputPdf = "resources/manual.pdf";
@@ -511,7 +522,7 @@ public class UniCom {
         }
     }
 
-    private class AboutUniCom implements ActionListener {
+    private static class AboutUniCom implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JOptionPane.showMessageDialog(null, "UniCom by Daniel Otal Rodríguez. 2016", "About",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -519,31 +530,32 @@ public class UniCom {
     }
 
     private class GraphSelectionHandler implements ListSelectionListener {
-
-        private JTable entriesTable;
-
-        public GraphSelectionHandler(JTable entriesTable) {
-            this.entriesTable = entriesTable;
-        }
-
         public void valueChanged(ListSelectionEvent e) {
-            int entryId = entriesTable.getSelectedRow();
+            JViewport jViewport = entriesScrollPane.getViewport();
+            JTable entriesJTable = (JTable) jViewport.getView();
+            int entryId = entriesJTable.getSelectedRow();
 
-            setNewGraphController.setNewGraph(chartViewer, graphData, entryId);
+            setNewGraphController.setNewGraph(chartViewer, graphData, naturalOrderJRadioButton.isSelected(), entryId);
 
             /**
              * Set area table
              */
-            double selectedObjectArea;
-            if ( entryId == 0 ) {
-                selectedObjectArea = graphData.getReferenceArea();
-            }
-            else {
-                selectedObjectArea = graphData.getEntryArea(entryId - 1);
+            double referenceArea;
+            double entryArea;
+            double commonEntryArea;
+            if ( naturalOrderJRadioButton.isSelected() ) {
+                referenceArea = graphData.getReferenceArea();
+                entryArea = graphData.getEntryArea(entryId);
+                commonEntryArea = graphData.getCommonEntryArea(entryId);
+            } else {
+                referenceArea = graphData.getReferenceOwaArea();
+                entryArea = graphData.getEntryOwaArea(entryId);
+                commonEntryArea = graphData.getCommonEntryOwaArea(entryId);
             }
             Object[][] graphicAreaTableData = {
-                    {"Reference Object", String.format("%.4f", graphData.getReferenceArea())},
-                    {"Selected Object", String.format("%.4f", selectedObjectArea)}
+                    {"Reference Object", String.format("%.4f", referenceArea)},
+                    {"Compare Object", String.format("%.4f", entryArea)},
+                    {"Shared", String.format("%.4f", commonEntryArea)}
             };
 
             JTable graphicAreaTable = (JTable) graphicAreaScrollPane.getViewport().getView();
@@ -555,11 +567,10 @@ public class UniCom {
             /**
              * Set similarity label
              */
-            if (entryId == 0) {
-                similarityLabel.setText("100%");
-            }
-            else {
-                similarityLabel.setText(String.format("%.2f", graphData.getCommonEntryAreaPercentage(entryId - 1)) + "%");
+            if ( naturalOrderJRadioButton.isSelected() ) {
+                similarityLabel.setText(String.format("%.2f", graphData.getCommonEntryAreaPercentage(entryId)) + "%");
+            } else {
+                similarityLabel.setText(String.format("%.2f", graphData.getCommonEntryOwaAreaPercentage(entryId)) + "%");
             }
         }
     }
@@ -568,18 +579,11 @@ public class UniCom {
         public void stateChanged(ChangeEvent changeEvent) {
             List<Double> commonEntriesAreaPercentage = graphData.getCommonEntriesAreaPercentage();
 
-            List<Integer> filteredRows = new ArrayList<Integer>();
+            List<Integer> filteredRows = new ArrayList<>();
             for (int i  = 0; i < commonEntriesAreaPercentage.size(); ++i) {
                 if (similarityFilterScrollBar.getValue() >= commonEntriesAreaPercentage.get(i)) {
-                    filteredRows.add(i + 1);
+                    filteredRows.add(i);
                 }
-            }
-
-            /**
-             * Set filtered row for the reference object
-             */
-            if ( similarityFilterScrollBar.getValue() == 100 ) {
-                filteredRows.add(0);
             }
 
             JViewport jViewport = entriesScrollPane.getViewport();
@@ -614,4 +618,18 @@ public class UniCom {
             return c;
         }
     }
+
+    private class OrderSelectionRadioListener implements ActionListener {
+        public void actionPerformed(ActionEvent e){
+            JRadioButton button = (JRadioButton) e.getSource();
+            JViewport jViewport = entriesScrollPane.getViewport();
+            JTable entriesJTable = (JTable) jViewport.getView();
+
+            if ( button.getText().equals("Natural") ) {
+                setNewGraphController.setNewGraph(chartViewer, graphData, true, entriesJTable.getSelectedRow());
+            } else if ( button.getText().equals("OWA") ) {
+                setNewGraphController.setNewGraph(chartViewer, graphData, false, entriesJTable.getSelectedRow());
+            }
+        }
+}
 }

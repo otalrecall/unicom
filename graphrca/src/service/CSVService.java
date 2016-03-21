@@ -26,14 +26,14 @@ public class CSVService {
         BufferedReader br = null;
         String line = "";
         String csvSplitBy = ";";
-        List<List<String>> entries = new ArrayList<List<String>>();
+        List<List<String>> entries = new ArrayList<>();
 
         try {
             br = new BufferedReader( new FileReader(path) );
             int lineCounter = 0;
             while ( ( line = br.readLine() ) != null ) {
                 List<String> entry = Arrays.asList( line.split(csvSplitBy) );
-                if (lineCounter == 0) {
+                if ( lineCounter == 0 ) {
                     if ( entry.size() < 2 ) {
                         throw new Exception("Not enough data. Objects must have more than one comparable attribute.");
                     }
@@ -121,20 +121,9 @@ public class CSVService {
                 List<String> labels = csvList.get(i);
                 graphData.setLabels(labels);
             }
-            else if (i == 1) {
-                List<Double> reference = graphData.getReference();
-                for(int j=0; j < csvList.get(i).size(); j++) {
-                    if ( csvList.get(i).get(j).isEmpty() ) {
-                        reference.add( 0.0 );
-                    }
-                    else {
-                        reference.add( Double.valueOf(csvList.get(i).get(j)) );
-                    }
-                }
-                graphData.setReference(reference);
-            } else {
-                List<Double> entry = new ArrayList<Double>();
-                for(int j=0; j < csvList.get(i).size(); j++) {
+            else {
+                List<Double> entry = new ArrayList<>();
+                for (int j = 0; j < csvList.get(0).size(); j++) {
                     if ( csvList.get(i).get(j).isEmpty() ) {
                         entry.add( 0.0 );
                     }
@@ -145,7 +134,8 @@ public class CSVService {
                 entries.add(entry);
             }
         }
-        graphData.setEntries(entries);
+        graphData.setReference( entries.get(0) );
+        graphData.setEntries( entries );
 
         return graphData;
     }
@@ -157,7 +147,7 @@ public class CSVService {
      * @param entryType
      * @throws NumberFormatException
      */
-    private void checkFormat(List<String> entry, EntryType entryType) throws NumberFormatException {
+    private void checkFormat(List<String> entry, EntryType entryType) throws Exception {
         switch (entryType) {
             case LABEL_TYPE:
 
@@ -165,7 +155,10 @@ public class CSVService {
             case NUMERIC_TYPE:
                 for (int i = 0; i < entry.size(); i++) {
                     if (!entry.get(i).isEmpty()) {
-                        Double.parseDouble(entry.get(i));
+                        if ( Double.parseDouble(entry.get(i)) < 0) {
+                            throw new Exception("The format of the csv is not correct. " +
+                                    "Negatives numbers are not allowed.");
+                        };
                     }
                 }
                 break;
