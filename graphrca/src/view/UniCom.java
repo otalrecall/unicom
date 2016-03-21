@@ -40,6 +40,8 @@ public class UniCom {
     private JMenuBar jMenuBar;
     private JButton loadCSVButton;
     private ChartViewer chartViewer;
+    private JPanel chartViewerHiddenBarJPanel;
+    private JPanel chartViewerJPanel;
     private JScrollPane entriesScrollPane;
     private JScrollPane graphicAreaScrollPane;
     private GraphData graphData;
@@ -161,7 +163,22 @@ public class UniCom {
         controlPanelJPanel.setVisible(false);
 
         chartViewer = new ChartViewer();
-        chartViewer.setVisible(false);
+
+        chartViewerHiddenBarJPanel = new JPanel();
+        chartViewerHiddenBarJPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 20, 0, new Color(238, 238, 238)));
+        chartViewerHiddenBarJPanel.setOpaque(false);
+
+        chartViewerJPanel = new JPanel() {
+            public boolean isOptimizedDrawingEnabled() {
+                return false;
+            }
+        };
+        LayoutManager overlay = new OverlayLayout(chartViewerJPanel);
+        chartViewerJPanel.setLayout(overlay);
+
+        chartViewerJPanel.add(chartViewerHiddenBarJPanel);
+        chartViewerJPanel.add(chartViewer);
+        chartViewerJPanel.setVisible(false);
 
         graphicAreaScrollPane = new JScrollPane();
         graphicAreaScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -208,8 +225,7 @@ public class UniCom {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
-        frame.add(chartViewer, gridBagConstraints);
-
+        frame.add(chartViewerJPanel, gridBagConstraints);
         frame.setVisible(true);
     }
 
@@ -368,6 +384,7 @@ public class UniCom {
                     entriesScrollPane.setVisible(true);
                     graphicAreaScrollPane.setVisible(true);
                     controlPanelJPanel.setVisible(true);
+                    chartViewerJPanel.setVisible(true);
 
                     /**
                      * Enable 'Generate Results...' menu option

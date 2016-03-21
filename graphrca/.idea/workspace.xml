@@ -7,13 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7489d312-4d0c-49b9-8566-83ba949684fa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/controller/LoadCSVToGraphController.class" afterPath="$PROJECT_DIR$/out/production/graphrca/controller/LoadCSVToGraphController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/controller/SetNewGraphController.class" afterPath="$PROJECT_DIR$/out/production/graphrca/controller/SetNewGraphController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/model/GraphData.class" afterPath="$PROJECT_DIR$/out/production/graphrca/model/GraphData.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/service/GraphDataService.class" afterPath="$PROJECT_DIR$/out/production/graphrca/service/GraphDataService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/service/MultiRadarChartService.class" afterPath="$PROJECT_DIR$/out/production/graphrca/service/MultiRadarChartService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/MultiRadarChartService.java" afterPath="$PROJECT_DIR$/src/service/MultiRadarChartService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/UniCom.java" afterPath="$PROJECT_DIR$/src/view/UniCom.java" />
     </list>
     <ignored path="graphrca.iws" />
@@ -39,10 +34,12 @@
       <file leaf-file-name="UniCom.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/UniCom.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33128834">
-              <caret line="100" column="90" selection-start-line="100" selection-start-column="90" selection-end-line="100" selection-end-column="90" />
+            <state vertical-scroll-proportion="12.800613">
+              <caret line="385" column="56" selection-start-line="385" selection-start-column="56" selection-end-line="385" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#7420#7545#0" expanded="true" />
+                <element signature="e#7544#7545#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,16 +60,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GenerateCSVController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controller/GenerateCSVController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -123,10 +110,23 @@
       <file leaf-file-name="MultiRadarChartService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/service/MultiRadarChartService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.6666665">
-              <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+            <state vertical-scroll-proportion="-6.6666665">
+              <caret line="26" column="57" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+              <folding>
+                <element signature="e#84#85#0" expanded="true" />
+                <element signature="e#112#113#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -149,73 +149,6 @@
               <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Arrays.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home/src.zip!/java/util/Arrays.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3840" column="0" selection-start-line="3840" selection-start-column="0" selection-end-line="3840" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#227755#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#3370#3371#0" expanded="false" />
-                <element signature="e#3446#3447#0" expanded="false" />
-                <element signature="e#5027#5028#0" expanded="false" />
-                <element signature="e#5098#5099#0" expanded="false" />
-                <element signature="e#6903#6904#0" expanded="false" />
-                <element signature="e#6974#6975#0" expanded="false" />
-                <element signature="e#8781#8782#0" expanded="false" />
-                <element signature="e#8852#8853#0" expanded="false" />
-                <element signature="e#10659#10660#0" expanded="false" />
-                <element signature="e#10730#10731#0" expanded="false" />
-                <element signature="e#12536#12537#0" expanded="false" />
-                <element signature="e#12595#12596#0" expanded="false" />
-                <element signature="e#14928#14929#0" expanded="false" />
-                <element signature="e#14999#15000#0" expanded="false" />
-                <element signature="e#17889#17890#0" expanded="false" />
-                <element signature="e#17960#17961#0" expanded="false" />
-                <element signature="e#84738#84739#0" expanded="false" />
-                <element signature="e#84795#84796#0" expanded="false" />
-                <element signature="e#88329#88330#0" expanded="false" />
-                <element signature="e#88386#88387#0" expanded="false" />
-                <element signature="e#91921#91922#0" expanded="false" />
-                <element signature="e#91978#91979#0" expanded="false" />
-                <element signature="e#95523#95524#0" expanded="false" />
-                <element signature="e#95580#95581#0" expanded="false" />
-                <element signature="e#99118#99119#0" expanded="false" />
-                <element signature="e#99175#99176#0" expanded="false" />
-                <element signature="e#102793#102794#0" expanded="false" />
-                <element signature="e#102850#102851#0" expanded="false" />
-                <element signature="e#107069#107070#0" expanded="false" />
-                <element signature="e#107126#107127#0" expanded="false" />
-                <element signature="e#111724#111725#0" expanded="false" />
-                <element signature="e#111781#111782#0" expanded="false" />
-                <element signature="e#177013#177014#0" expanded="false" />
-                <element signature="e#177054#177055#0" expanded="false" />
-                <element signature="e#177353#177354#0" expanded="false" />
-                <element signature="e#177410#177411#0" expanded="false" />
-                <element signature="e#177457#177458#0" expanded="false" />
-                <element signature="e#177496#177497#0" expanded="false" />
-                <element signature="e#177551#177552#0" expanded="false" />
-                <element signature="e#177591#177592#0" expanded="false" />
-                <element signature="e#178785#178786#0" expanded="false" />
-                <element signature="e#178832#178833#0" expanded="false" />
-                <element signature="e#178897#178898#0" expanded="false" />
-                <element signature="e#178976#178977#0" expanded="false" />
-                <element signature="e#179525#179526#0" expanded="false" />
-                <element signature="e#179566#179567#0" expanded="false" />
-                <element signature="e#223144#223145#0" expanded="false" />
-                <element signature="e#223197#223198#0" expanded="false" />
-                <element signature="e#224394#224395#0" expanded="false" />
-                <element signature="e#224447#224448#0" expanded="false" />
-                <element signature="e#225606#225607#0" expanded="false" />
-                <element signature="e#225659#225660#0" expanded="false" />
-                <element signature="e#226830#226831#0" expanded="false" />
-                <element signature="e#226883#226884#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -262,12 +195,12 @@
         <option value="$PROJECT_DIR$/src/controller/GenerateCSVController.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/view/GraphRCA.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/controller/SetNewGraphController.java" />
         <option value="$PROJECT_DIR$/src/model/GraphData.java" />
         <option value="$PROJECT_DIR$/src/service/GraphDataService.java" />
         <option value="$PROJECT_DIR$/src/service/CSVService.java" />
         <option value="$PROJECT_DIR$/src/controller/LoadCSVToGraphController.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/service/MultiRadarChartService.java" />
         <option value="$PROJECT_DIR$/src/view/UniCom.java" />
       </list>
@@ -468,20 +401,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graphrca" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graphrca" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -505,6 +424,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/META-INF" />
       <recent name="$PROJECT_DIR$/src/resources" />
     </key>
   </component>
@@ -888,7 +810,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458579785263</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Change chart background color, set similarity border title to center">
+      <created>1458588571462</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1458588571462</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -969,7 +897,8 @@
     <MESSAGE value="Add interface options for changing chart axis order and changing the reference object" />
     <MESSAGE value="Disable table columns from dragging" />
     <MESSAGE value="Add natural and owa chart axis selector" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add natural and owa chart axis selector" />
+    <MESSAGE value="Change chart background color, set similarity border title to center" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change chart background color, set similarity border title to center" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -982,16 +911,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/view/UniCom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="118" column="69" selection-start-line="118" selection-start-column="69" selection-end-line="118" selection-end-column="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/GraphData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1076,6 +995,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7420#7545#0" expanded="true" />
+            <element signature="e#7544#7545#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1157,6 +1078,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7420#7545#0" expanded="true" />
+            <element signature="e#7544#7545#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1222,6 +1145,8 @@
           <caret line="52" column="52" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7420#7545#0" expanded="true" />
+            <element signature="e#7544#7545#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1247,6 +1172,8 @@
           <caret line="52" column="52" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7420#7545#0" expanded="true" />
+            <element signature="e#7544#7545#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1272,6 +1199,8 @@
           <caret line="52" column="52" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7420#7545#0" expanded="true" />
+            <element signature="e#7544#7545#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1289,6 +1218,8 @@
           <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7420#7545#0" expanded="true" />
+            <element signature="e#7544#7545#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1313,6 +1244,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7420#7545#0" expanded="true" />
+            <element signature="e#7544#7545#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1370,14 +1303,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1526,10 +1451,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+          <folding>
+            <element signature="e#84#85#0" expanded="true" />
+            <element signature="e#112#113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/service/MultiRadarChartService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.6666665">
-          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+        <state vertical-scroll-proportion="-6.6666665">
+          <caret line="26" column="57" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1538,10 +1474,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/UniCom.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33128834">
-          <caret line="100" column="90" selection-start-line="100" selection-start-column="90" selection-end-line="100" selection-end-column="90" />
+        <state vertical-scroll-proportion="12.800613">
+          <caret line="385" column="56" selection-start-line="385" selection-start-column="56" selection-end-line="385" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7420#7545#0" expanded="true" />
+            <element signature="e#7544#7545#0" expanded="true" />
           </folding>
         </state>
       </provider>
