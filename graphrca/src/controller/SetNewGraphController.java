@@ -5,8 +5,6 @@ import model.GraphData;
 import service.GraphDataService;
 import service.MultiRadarChartService;
 
-import javax.swing.*;
-
 public class SetNewGraphController {
 
     private MultiRadarChartService multiRadarChartService;
@@ -21,5 +19,4 @@ public class SetNewGraphController {
         multiRadarChartService.createChart();
         multiRadarChartService.compareObjects(chartViewer, graphData, isNaturalChartAxisOrder, entryId);
     }
-
 }

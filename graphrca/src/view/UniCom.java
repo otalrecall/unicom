@@ -55,6 +55,7 @@ public class UniCom {
     private JLabel similarityLabel;
     private JPanel similarityFilterJPanel;
     private JScrollBar similarityFilterScrollBar;
+    private JCheckBox similarityFilterJCheckBox;
     private JLabel similarityFilterJLabel;
 
     private LoadCSVToGraphController loadCSVToGraphController;
@@ -115,6 +116,9 @@ public class UniCom {
         similarityFilterJLabel = new JLabel("0%");
         similarityFilterJLabel.setPreferredSize( new Dimension(40, 20) );
 
+        similarityFilterJCheckBox = new JCheckBox();
+        similarityFilterJCheckBox.addActionListener( new SimilarityFilterJCheckboxListener() );
+
         naturalOrderJRadioButton = new JRadioButton("Natural");
         naturalOrderJRadioButton.setSelected(true);
         naturalOrderJRadioButton.addActionListener( new OrderSelectionRadioListener() );
@@ -148,9 +152,10 @@ public class UniCom {
         selectEntryControlJPanel.add(referenceObjectJRadioButton);
 
         similarityFilterJPanel = new JPanel();
-        similarityFilterJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
+        similarityFilterJPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
         similarityFilterJPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         similarityFilterJPanel.setBorder(BorderFactory.createTitledBorder("Similarity Filter"));
+        similarityFilterJPanel.add(similarityFilterJCheckBox);
         similarityFilterJPanel.add(similarityFilterScrollBar);
         similarityFilterJPanel.add(similarityFilterJLabel);
 
@@ -306,6 +311,29 @@ public class UniCom {
         entriesTableSelectionModel.addListSelectionListener( new GraphSelectionHandler() );
 
         entriesScrollPane.setViewportView(entriesTable);
+    }
+
+    /**
+     * Applies the similarity filter on the entries table
+     */
+    private void paintSimilarityFilter() {
+        List<Double> commonEntriesAreaPercentage = graphData.getCommonEntriesAreaPercentage();
+
+        List<Integer> filteredRows = new ArrayList<>();
+        for (int i  = 0; i < commonEntriesAreaPercentage.size(); ++i) {
+            if (similarityFilterScrollBar.getValue() >= commonEntriesAreaPercentage.get(i)) {
+                filteredRows.add(i);
+            }
+        }
+
+        JViewport jViewport = entriesScrollPane.getViewport();
+        JTable entriesJTable = (JTable) jViewport.getView();
+        for (int i = 0; i < entriesJTable.getColumnCount(); i++) {
+            entriesJTable.getColumnModel().getColumn(i).setCellRenderer( new SimilarityFilterCellRenderer(filteredRows) );
+        }
+
+        similarityFilterJLabel.setText( similarityFilterScrollBar.getValue() + "%" );
+        entriesJTable.repaint();
     }
 
     private class CustomTableModel extends AbstractTableModel {
@@ -596,27 +624,11 @@ public class UniCom {
 
     private class SimilarityScrollBarChangeListener implements ChangeListener {
         public void stateChanged(ChangeEvent changeEvent) {
-            List<Double> commonEntriesAreaPercentage = graphData.getCommonEntriesAreaPercentage();
-
-            List<Integer> filteredRows = new ArrayList<>();
-            for (int i  = 0; i < commonEntriesAreaPercentage.size(); ++i) {
-                if (similarityFilterScrollBar.getValue() >= commonEntriesAreaPercentage.get(i)) {
-                    filteredRows.add(i);
-                }
-            }
-
-            JViewport jViewport = entriesScrollPane.getViewport();
-            JTable entriesJTable = (JTable) jViewport.getView();
-            for (int i = 0; i < entriesJTable.getColumnCount(); i++) {
-                entriesJTable.getColumnModel().getColumn(i).setCellRenderer( new SimilarityFilterCellRenderer(filteredRows) );
-            }
-
-            similarityFilterJLabel.setText( similarityFilterScrollBar.getValue() + "%" );
-            entriesJTable.repaint();
+            paintSimilarityFilter();
         }
     }
 
-    private static class SimilarityFilterCellRenderer extends DefaultTableCellRenderer {
+    private class SimilarityFilterCellRenderer extends DefaultTableCellRenderer {
 
         private List<Integer> filteredRows;
 
@@ -627,12 +639,11 @@ public class UniCom {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
                                                        int row, int column) {
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            if ( filteredRows.contains(row) ) {
+            if ( filteredRows.contains(row) && similarityFilterJCheckBox.isSelected() ) {
                 c.setBackground( new Color(135, 206, 250) );
             }
             else {
                 c.setBackground( Color.WHITE );
-                table.setSelectionForeground( Color.GRAY );
             }
             return c;
         }
@@ -650,5 +661,11 @@ public class UniCom {
                 setNewGraphController.setNewGraph(chartViewer, graphData, false, entriesJTable.getSelectedRow());
             }
         }
-}
+    }
+
+    private class SimilarityFilterJCheckboxListener implements ActionListener {
+        public void actionPerformed(ActionEvent e){
+            paintSimilarityFilter();
+        }
+    }
 }
