@@ -76,10 +76,10 @@ public class MultiRadarChartService {
          * Chart creation
          */
         polarChart.removeDynamicLayer();
-        polarChart.addAreaLayer(reference, 0x806666cc, "Reference Object");
-        polarChart.addLineLayer(reference, 0x6666cc).setLineWidth(3);
-        polarChart.addAreaLayer(entry, 0x80cc6666, "Compare Object");
-        polarChart.addLineLayer(entry, 0xcc6666).setLineWidth(3);
+        polarChart.addAreaLayer(reference, 0x80cc6666, "Reference Object");
+        polarChart.addLineLayer(reference, 0xcc6666).setLineWidth(3);
+        polarChart.addAreaLayer(entry,0x806666cc, "Compare Object");
+        polarChart.addLineLayer(entry, 0x6666cc).setLineWidth(3);
         polarChart.angularAxis().setLabels(labels);
 
         chartViewer.setChart(polarChart);

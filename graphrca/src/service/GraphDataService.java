@@ -32,7 +32,15 @@ public class GraphDataService {
             double commonEntryArea = polygonAreaCalculatorService.calculateCommonPolygonArea(reference,
                     graphData.getEntryToDouble(i));
             commonEntriesArea.add( commonEntryArea );
-            commonEntriesAreaPercentage.add( commonEntryArea / referenceArea * 100);
+
+            double commonAreaPercentage;
+            if ( referenceArea != 0 ) {
+                commonAreaPercentage = commonEntryArea / referenceArea * 100;
+            }
+            else {
+                commonAreaPercentage = 0;
+            }
+            commonEntriesAreaPercentage.add( commonAreaPercentage );
         }
         graphData.setEntriesArea( entriesArea );
         graphData.setCommonEntriesArea( commonEntriesArea );
@@ -58,7 +66,16 @@ public class GraphDataService {
             entriesOwaArea.add( polygonAreaCalculatorService.calculatePolygonArea(entry) );
             double commonEntryOwaArea = polygonAreaCalculatorService.calculateCommonPolygonArea( reference, entry );
             commonEntriesOwaArea.add( commonEntryOwaArea );
-            commonEntriesOwaAreaPercentage.add( commonEntryOwaArea / referenceOwaArea * 100);
+
+            double commonOwaAreaPercentage;
+            if ( referenceOwaArea != 0 ) {
+                commonOwaAreaPercentage = commonEntryOwaArea / referenceOwaArea * 100;
+            }
+            else {
+                commonOwaAreaPercentage = 0;
+            }
+
+            commonEntriesOwaAreaPercentage.add( commonOwaAreaPercentage );
         }
         graphData.setEntriesOwaArea( entriesOwaArea );
         graphData.setCommonEntriesOwaArea( commonEntriesOwaArea );
@@ -114,6 +131,20 @@ public class GraphDataService {
         }
 
         return newLabels;
+    }
+
+    /**
+     * Changes the reference object for the entry from the entries table with the index entryId
+     *
+     * @param graphData
+     * @param entryId
+     */
+    public void changeReferenceObject(GraphData graphData, int entryId) {
+        List<Double> newReference = graphData.getEntries().get(entryId);
+        graphData.setReference( newReference );
+
+        calculateAreaData( graphData );
+        calculateOwaAreaData( graphData );
     }
 
     /**

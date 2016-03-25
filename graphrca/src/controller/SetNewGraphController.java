@@ -19,4 +19,8 @@ public class SetNewGraphController {
         multiRadarChartService.createChart();
         multiRadarChartService.compareObjects(chartViewer, graphData, isNaturalChartAxisOrder, entryId);
     }
+
+    public void changeReferenceObject(GraphData graphData, int entryId) {
+        graphDataService.changeReferenceObject(graphData, entryId);
+    }
 }

@@ -209,4 +209,13 @@ public class GraphData {
     public double getCommonEntryOwaAreaPercentage(int entryId) {
         return commonEntriesOwaAreaPercentage.get(entryId);
     }
+
+    /**
+     * Gets the position of the reference in the entries list
+     *
+     * @return
+     */
+    public int getReferenceIndex() {
+        return entries.indexOf(reference);
+    }
 }

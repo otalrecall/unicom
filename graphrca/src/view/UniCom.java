@@ -314,9 +314,9 @@ public class UniCom {
     }
 
     /**
-     * Applies the similarity filter on the entries table
+     * Applies the similarity filter on the entries table and paints the reference object
      */
-    private void paintSimilarityFilter() {
+    private void paintEntriesTable() {
         List<Double> commonEntriesAreaPercentage = graphData.getCommonEntriesAreaPercentage();
 
         List<Integer> filteredRows = new ArrayList<>();
@@ -456,6 +456,11 @@ public class UniCom {
                     similarityLabel.setText( String.format( "%.2f", graphData.getCommonEntryAreaPercentage(0) ) + "%" );
 
                     /**
+                     * Set reference color row in entries table
+                     */
+                    paintEntriesTable();
+
+                    /**
                      * Set similarity filter bar to 0
                      */
                     similarityFilterScrollBar.setValue(0);
@@ -582,6 +587,10 @@ public class UniCom {
             JTable entriesJTable = (JTable) jViewport.getView();
             int entryId = entriesJTable.getSelectedRow();
 
+            if ( referenceObjectJRadioButton.isSelected() ) {
+                setNewGraphController.changeReferenceObject(graphData, entryId);
+            }
+
             setNewGraphController.setNewGraph(chartViewer, graphData, naturalOrderJRadioButton.isSelected(), entryId);
 
             /**
@@ -624,7 +633,7 @@ public class UniCom {
 
     private class SimilarityScrollBarChangeListener implements ChangeListener {
         public void stateChanged(ChangeEvent changeEvent) {
-            paintSimilarityFilter();
+            paintEntriesTable();
         }
     }
 
@@ -639,11 +648,16 @@ public class UniCom {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
                                                        int row, int column) {
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            if ( filteredRows.contains(row) && similarityFilterJCheckBox.isSelected() ) {
-                c.setBackground( new Color(135, 206, 250) );
+            if ( row == graphData.getReferenceIndex() ) {
+                c.setBackground( new Color(222,150,150) );
             }
             else {
-                c.setBackground( Color.WHITE );
+                if ( filteredRows.contains(row) && similarityFilterJCheckBox.isSelected() ) {
+                    c.setBackground( new Color(135, 206, 250) );
+                }
+                else {
+                    c.setBackground( Color.WHITE );
+                }
             }
             return c;
         }
@@ -665,7 +679,7 @@ public class UniCom {
 
     private class SimilarityFilterJCheckboxListener implements ActionListener {
         public void actionPerformed(ActionEvent e){
-            paintSimilarityFilter();
+            paintEntriesTable();
         }
     }
 }
