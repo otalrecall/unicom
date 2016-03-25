@@ -91,6 +91,8 @@ public class CSVService {
         csv += String.format( "%.4f", graphData.getReferenceArea() ) + ";" +
                 String.format( "%.4f", graphData.getReferenceArea() ) + ";100" + newline;
 
+        csv += newline;
+
         List<List<Double>> entries = graphData.getEntries();
         List<Double> commonEntriesArea = graphData.getCommonEntriesArea();
         List<Double> commonEntriesAreaPercentage = graphData.getCommonEntriesAreaPercentage();
