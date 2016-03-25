@@ -576,8 +576,16 @@ public class UniCom {
 
     private static class AboutUniCom implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            /**
+             * Get image from resources and create icon
+             */
+            java.net.URL url = ClassLoader.getSystemResource("resources/icon.png");
+            Toolkit kit = Toolkit.getDefaultToolkit();
+            Image image = kit.createImage(url);
+            Icon icon = new ImageIcon(image);
+
             JOptionPane.showMessageDialog(null, "UniCom by Daniel Otal Rodríguez. 2016", "About",
-                    JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE, icon);
         }
     }
 
@@ -589,6 +597,22 @@ public class UniCom {
 
             if ( referenceObjectJRadioButton.isSelected() ) {
                 setNewGraphController.changeReferenceObject(graphData, entryId);
+
+                /**
+                 * Reset similarity filter
+                 */
+                similarityFilterScrollBar.setValue(0);
+                similarityFilterJCheckBox.setSelected(false);
+
+                /**
+                 * Reset chart axis order
+                 */
+                naturalOrderJRadioButton.setSelected(true);
+
+                /**
+                 * Repaint table
+                 */
+                paintEntriesTable();
             }
 
             setNewGraphController.setNewGraph(chartViewer, graphData, naturalOrderJRadioButton.isSelected(), entryId);

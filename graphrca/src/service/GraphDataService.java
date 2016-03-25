@@ -143,6 +143,7 @@ public class GraphDataService {
         List<Double> newReference = graphData.getEntries().get(entryId);
         graphData.setReference( newReference );
 
+        calculateOwaOrder( graphData );
         calculateAreaData( graphData );
         calculateOwaAreaData( graphData );
     }
