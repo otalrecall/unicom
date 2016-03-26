@@ -14,6 +14,14 @@ public class GraphData {
     private List<Double> commonEntriesArea;
     private List<Double> commonEntriesAreaPercentage;
 
+    private List<Double> referenceScaled;
+    private List<List<Double>> entriesScaled;
+
+    private double referenceAreaScaled;
+    private List<Double> entriesAreaScaled;
+    private List<Double> commonEntriesAreaScaled;
+    private List<Double> commonEntriesAreaPercentageScaled;
+
     private List<Integer> owaOrder;
 
     private double referenceOwaArea;
@@ -49,6 +57,54 @@ public class GraphData {
 
     public void setEntries(List<List<Double>> entries) {
         this.entries = entries;
+    }
+
+    public List<Double> getReferenceScaled() {
+        return referenceScaled;
+    }
+
+    public void setReferenceScaled(List<Double> referenceScaled) {
+        this.referenceScaled = referenceScaled;
+    }
+
+    public List<List<Double>> getEntriesScaled() {
+        return entriesScaled;
+    }
+
+    public void setEntriesScaled(List<List<Double>> entriesScaled) {
+        this.entriesScaled = entriesScaled;
+    }
+
+    public double getReferenceAreaScaled() {
+        return referenceAreaScaled;
+    }
+
+    public void setReferenceAreaScaled(double referenceAreaScaled) {
+        this.referenceAreaScaled = referenceAreaScaled;
+    }
+
+    public List<Double> getEntriesAreaScaled() {
+        return entriesAreaScaled;
+    }
+
+    public void setEntriesAreaScaled(List<Double> entriesAreaScaled) {
+        this.entriesAreaScaled = entriesAreaScaled;
+    }
+
+    public List<Double> getCommonEntriesAreaScaled() {
+        return commonEntriesAreaScaled;
+    }
+
+    public void setCommonEntriesAreaScaled(List<Double> commonEntriesAreaScaled) {
+        this.commonEntriesAreaScaled = commonEntriesAreaScaled;
+    }
+
+    public List<Double> getCommonEntriesAreaPercentageScaled() {
+        return commonEntriesAreaPercentageScaled;
+    }
+
+    public void setCommonEntriesAreaPercentageScaled(List<Double> commonEntriesAreaPercentageScaled) {
+        this.commonEntriesAreaPercentageScaled = commonEntriesAreaPercentageScaled;
     }
 
     public double getReferenceArea() {

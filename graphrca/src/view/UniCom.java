@@ -18,9 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,6 +55,8 @@ public class UniCom {
     private JScrollBar similarityFilterScrollBar;
     private JCheckBox similarityFilterJCheckBox;
     private JLabel similarityFilterJLabel;
+    private JMenuItem generate;
+    private JCheckBoxMenuItem scale;
 
     private LoadCSVToGraphController loadCSVToGraphController;
     private SetNewGraphController setNewGraphController;
@@ -249,16 +249,27 @@ public class UniCom {
         load.addActionListener(new CSVLoadDialog());
         fileMenu.add(load);
 
-        JMenuItem generate = new JMenuItem("Generate Results...", KeyEvent.VK_G);
+        generate = new JMenuItem("Generate Results...", KeyEvent.VK_G);
         generate.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
         generate.addActionListener(new GenerateResults());
         generate.setEnabled(false);
         fileMenu.add(generate);
 
+        fileMenu.addSeparator();
+
         JMenuItem quit = new JMenuItem("Quit UniCom", KeyEvent.VK_Q);
         quit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
         quit.addActionListener(new QuitUniCom());
         fileMenu.add(quit);
+
+        JMenu chartMenu = new JMenu("Chart");
+        chartMenu.setMnemonic(KeyEvent.VK_C);
+        jMenuBar.add(chartMenu);
+
+        scale = new JCheckBoxMenuItem("Scaled Chart", false);
+        scale.setMnemonic(KeyEvent.VK_S);
+        scale.addItemListener(new ScaledChart());
+        chartMenu.add(scale);
 
         JMenu helpMenu = new JMenu("Help");
         helpMenu.setMnemonic(KeyEvent.VK_H);
@@ -459,14 +470,7 @@ public class UniCom {
                     /**
                      * Enable 'Generate Results...' menu option
                      */
-                    JMenu jMenu = jMenuBar.getMenu(0);
-                    JMenuItem jMenuItem;
-                    for (int i = 0; i < jMenu.getItemCount(); ++i) {
-                        jMenuItem = jMenu.getItem(i);
-                        if (jMenuItem.getText() == "Generate Results...") {
-                            jMenuItem.setEnabled(true);
-                        }
-                    }
+                    generate.setEnabled(true);
 
                     /**
                      * Set area table
@@ -592,6 +596,17 @@ public class UniCom {
     private static class QuitUniCom implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
+        }
+    }
+
+    private class ScaledChart implements ItemListener {
+        public void itemStateChanged(ItemEvent e) {
+            if ( scale.isSelected() ) {
+
+            }
+            else {
+
+            }
         }
     }
 
