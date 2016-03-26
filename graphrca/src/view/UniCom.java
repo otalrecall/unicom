@@ -299,6 +299,23 @@ public class UniCom {
 
         JTable entriesTable = new JTable(new CustomTableModel(dataEntriesTable, labelsEntriesTable));
 
+        /**
+         * Add listener for click events on the entriesJTable
+         */
+        entriesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JViewport jViewport = entriesScrollPane.getViewport();
+                JTable entriesJTable = (JTable) jViewport.getView();
+
+                int row = entriesJTable.rowAtPoint(evt.getPoint());
+                int col = entriesJTable.columnAtPoint(evt.getPoint());
+                if (row >= 0 && col >= 0 && referenceObjectJRadioButton.isSelected()) {
+                    changeReferenceObject(row);
+                }
+            }
+        });
+
         entriesTable.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
         entriesTable.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
         entriesTable.getTableHeader().setReorderingAllowed(false);
@@ -311,6 +328,31 @@ public class UniCom {
         entriesTableSelectionModel.addListSelectionListener( new GraphSelectionHandler() );
 
         entriesScrollPane.setViewportView(entriesTable);
+    }
+
+    /**
+     * Change the reference object for the selected one in the entriesJTable with index row
+     *
+     * @param row
+     */
+    private void changeReferenceObject(int row) {
+        setNewGraphController.changeReferenceObject(graphData, row);
+
+        /**
+         * Reset similarity filter
+         */
+        similarityFilterScrollBar.setValue(0);
+        similarityFilterJCheckBox.setSelected(false);
+
+        /**
+         * Reset chart axis order
+         */
+        naturalOrderJRadioButton.setSelected(true);
+
+        /**
+         * Repaint table
+         */
+        paintEntriesTable();
     }
 
     /**
@@ -591,66 +633,52 @@ public class UniCom {
 
     private class GraphSelectionHandler implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
-            JViewport jViewport = entriesScrollPane.getViewport();
-            JTable entriesJTable = (JTable) jViewport.getView();
-            int entryId = entriesJTable.getSelectedRow();
+            if ( !e.getValueIsAdjusting() ) {
+                JViewport jViewport = entriesScrollPane.getViewport();
+                JTable entriesJTable = (JTable) jViewport.getView();
+                int entryId = entriesJTable.getSelectedRow();
 
-            if ( referenceObjectJRadioButton.isSelected() ) {
-                setNewGraphController.changeReferenceObject(graphData, entryId);
+                if ( referenceObjectJRadioButton.isSelected() ) {
+                    changeReferenceObject(entryId);
+                }
 
-                /**
-                 * Reset similarity filter
-                 */
-                similarityFilterScrollBar.setValue(0);
-                similarityFilterJCheckBox.setSelected(false);
+                setNewGraphController.setNewGraph(chartViewer, graphData, naturalOrderJRadioButton.isSelected(), entryId);
 
                 /**
-                 * Reset chart axis order
+                 * Set area table
                  */
-                naturalOrderJRadioButton.setSelected(true);
+                double referenceArea;
+                double entryArea;
+                double commonEntryArea;
+                if (naturalOrderJRadioButton.isSelected()) {
+                    referenceArea = graphData.getReferenceArea();
+                    entryArea = graphData.getEntryArea(entryId);
+                    commonEntryArea = graphData.getCommonEntryArea(entryId);
+                } else {
+                    referenceArea = graphData.getReferenceOwaArea();
+                    entryArea = graphData.getEntryOwaArea(entryId);
+                    commonEntryArea = graphData.getCommonEntryOwaArea(entryId);
+                }
+                Object[][] graphicAreaTableData = {
+                        {"Reference Object", String.format("%.4f", referenceArea)},
+                        {"Compare Object", String.format("%.4f", entryArea)},
+                        {"Shared", String.format("%.4f", commonEntryArea)}
+                };
+
+                JTable graphicAreaTable = (JTable) graphicAreaScrollPane.getViewport().getView();
+                CustomTableModel graphicAreaTableModel = (CustomTableModel) graphicAreaTable.getModel();
+                graphicAreaTableModel.setData(graphicAreaTableData);
+                graphicAreaTable.setModel(graphicAreaTableModel);
+                graphicAreaScrollPane.setViewportView(graphicAreaTable);
 
                 /**
-                 * Repaint table
+                 * Set similarity label
                  */
-                paintEntriesTable();
-            }
-
-            setNewGraphController.setNewGraph(chartViewer, graphData, naturalOrderJRadioButton.isSelected(), entryId);
-
-            /**
-             * Set area table
-             */
-            double referenceArea;
-            double entryArea;
-            double commonEntryArea;
-            if ( naturalOrderJRadioButton.isSelected() ) {
-                referenceArea = graphData.getReferenceArea();
-                entryArea = graphData.getEntryArea(entryId);
-                commonEntryArea = graphData.getCommonEntryArea(entryId);
-            } else {
-                referenceArea = graphData.getReferenceOwaArea();
-                entryArea = graphData.getEntryOwaArea(entryId);
-                commonEntryArea = graphData.getCommonEntryOwaArea(entryId);
-            }
-            Object[][] graphicAreaTableData = {
-                    {"Reference Object", String.format("%.4f", referenceArea)},
-                    {"Compare Object", String.format("%.4f", entryArea)},
-                    {"Shared", String.format("%.4f", commonEntryArea)}
-            };
-
-            JTable graphicAreaTable = (JTable) graphicAreaScrollPane.getViewport().getView();
-            CustomTableModel graphicAreaTableModel = (CustomTableModel) graphicAreaTable.getModel();
-            graphicAreaTableModel.setData(graphicAreaTableData);
-            graphicAreaTable.setModel(graphicAreaTableModel);
-            graphicAreaScrollPane.setViewportView(graphicAreaTable);
-
-            /**
-             * Set similarity label
-             */
-            if ( naturalOrderJRadioButton.isSelected() ) {
-                similarityLabel.setText(String.format("%.2f", graphData.getCommonEntryAreaPercentage(entryId)) + "%");
-            } else {
-                similarityLabel.setText(String.format("%.2f", graphData.getCommonEntryOwaAreaPercentage(entryId)) + "%");
+                if (naturalOrderJRadioButton.isSelected()) {
+                    similarityLabel.setText(String.format("%.2f", graphData.getCommonEntryAreaPercentage(entryId)) + "%");
+                } else {
+                    similarityLabel.setText(String.format("%.2f", graphData.getCommonEntryOwaAreaPercentage(entryId)) + "%");
+                }
             }
         }
     }

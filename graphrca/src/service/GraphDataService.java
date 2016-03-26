@@ -141,11 +141,13 @@ public class GraphDataService {
      */
     public void changeReferenceObject(GraphData graphData, int entryId) {
         List<Double> newReference = graphData.getEntries().get(entryId);
-        graphData.setReference( newReference );
+        if ( newReference != graphData.getReference() ) {
+            graphData.setReference( newReference );
 
-        calculateOwaOrder( graphData );
-        calculateAreaData( graphData );
-        calculateOwaAreaData( graphData );
+            calculateOwaOrder( graphData );
+            calculateAreaData( graphData );
+            calculateOwaAreaData( graphData );
+        }
     }
 
     /**
