@@ -58,6 +58,8 @@ public class UniCom {
     private JMenuItem generate;
     private JCheckBoxMenuItem scale;
 
+    private boolean graphSelectionHandlerIsFired;
+
     private LoadCSVToGraphController loadCSVToGraphController;
     private SetNewGraphController setNewGraphController;
     private GenerateCSVController generateCSVController;
@@ -321,9 +323,12 @@ public class UniCom {
 
                 int row = entriesJTable.rowAtPoint(evt.getPoint());
                 int col = entriesJTable.columnAtPoint(evt.getPoint());
-                if (row >= 0 && col >= 0 && referenceObjectJRadioButton.isSelected()) {
+                if (row >= 0 && col >= 0 && referenceObjectJRadioButton.isSelected() && !graphSelectionHandlerIsFired) {
                     changeReferenceObject(row);
+                    setNewGraphController.setNewGraph(chartViewer, graphData, naturalOrderJRadioButton.isSelected(), row);
                 }
+
+                graphSelectionHandlerIsFired = false;
             }
         });
 
@@ -649,11 +654,13 @@ public class UniCom {
     private class GraphSelectionHandler implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
             if ( !e.getValueIsAdjusting() ) {
+                graphSelectionHandlerIsFired = true;
+
                 JViewport jViewport = entriesScrollPane.getViewport();
                 JTable entriesJTable = (JTable) jViewport.getView();
                 int entryId = entriesJTable.getSelectedRow();
 
-                if ( referenceObjectJRadioButton.isSelected() ) {
+                if (referenceObjectJRadioButton.isSelected()) {
                     changeReferenceObject(entryId);
                 }
 
