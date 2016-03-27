@@ -15,9 +15,10 @@ public class SetNewGraphController {
         multiRadarChartService = new MultiRadarChartService(graphDataService);
     }
 
-    public void setNewGraph(ChartViewer chartViewer, GraphData graphData, boolean isNaturalChartAxisOrder, int entryId) {
+    public void setNewGraph(ChartViewer chartViewer, GraphData graphData, boolean isNaturalChartAxisOrder,
+                            boolean isChartScaled, int entryId) {
         multiRadarChartService.createChart();
-        multiRadarChartService.compareObjects(chartViewer, graphData, isNaturalChartAxisOrder, entryId);
+        multiRadarChartService.compareObjects(chartViewer, graphData, isNaturalChartAxisOrder, isChartScaled, entryId);
     }
 
     public void changeReferenceObject(GraphData graphData, int entryId) {

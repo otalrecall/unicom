@@ -82,27 +82,30 @@ public class CSVService {
         for (int i = 0; i < labels.size(); ++i) {
             csv += labels.get(i) + ";";
         }
-        csv += "Area;Common Area;Common Percentage" + newline;
+        csv += "Area;Common Area;Common Percentage;Scaled Area, Scaled Common Area;Scaled Common Percentage" + newline;
 
         List<Double> reference = graphData.getReference();
         for (int i = 0; i < reference.size(); ++i) {
             csv += reference.get(i) + ";";
         }
         csv += String.format( "%.4f", graphData.getReferenceArea() ) + ";" +
-                String.format( "%.4f", graphData.getReferenceArea() ) + ";100" + newline;
+                String.format( "%.4f", graphData.getReferenceArea() ) + ";100;" +
+                String.format( "%.4f", graphData.getReferenceAreaScaled() ) +
+                String.format( "%.4f", graphData.getReferenceAreaScaled() )  + ";100" + newline;
 
         csv += newline;
 
         List<List<Double>> entries = graphData.getEntries();
-        List<Double> commonEntriesArea = graphData.getCommonEntriesArea();
-        List<Double> commonEntriesAreaPercentage = graphData.getCommonEntriesAreaPercentage();
         for (int i = 0; i < entries.size(); ++i) {
             for (int j = 0; j < entries.get(i).size(); ++j) {
                 csv += entries.get(i).get(j) + ";";
             }
-            csv += String.format( "%.4f", graphData.getEntryArea(i) ) + ";" +
-                    String.format( "%.4f", commonEntriesArea.get(i) ) + ";" +
-                    String.format( "%.2f", commonEntriesAreaPercentage.get(i) ) + newline;
+            csv += String.format( "%.4f", graphData.getEntriesArea().get(i) ) + ";" +
+                    String.format( "%.4f", graphData.getCommonEntriesArea().get(i) ) + ";" +
+                    String.format( "%.2f", graphData.getCommonEntriesAreaPercentage().get(i) ) + ";" +
+                    String.format( "%.4f", graphData.getEntriesAreaScaled().get(i) ) + ";" +
+                    String.format( "%.4f", graphData.getCommonEntriesAreaScaled().get(i) ) + ";" +
+                    String.format( "%.2f", graphData.getCommonEntriesAreaPercentageScaled().get(i) ) + newline;
         }
 
         return csv;

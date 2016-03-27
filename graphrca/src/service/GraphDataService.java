@@ -3,7 +3,9 @@ package service;
 import model.GraphData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 public class GraphDataService {
 
@@ -48,57 +50,51 @@ public class GraphDataService {
     }
 
     /**
-     * Calculates all the OWA areas for every polygon in the set of graphs graphData (reference and select objects, along with
+     * Calculates all the Scaled areas for every polygon in the set of graphs graphData (reference and select objects, along with
      * their common area)
      *
      * @param graphData
      */
-    public void calculateOwaAreaData(GraphData graphData) {
-        double[] reference = sortEntryToOwa( graphData.getReferenceToDouble(), graphData.getOwaOrder() );
-        double referenceOwaArea = polygonAreaCalculatorService.calculatePolygonArea(reference);
-        graphData.setReferenceOwaArea( referenceOwaArea );
+    public void calculateScaleAreaData(GraphData graphData) {
+        double[] referenceScaled = graphData.getReferenceScaledToDouble();
+        double referenceAreaScaled = polygonAreaCalculatorService.calculatePolygonArea(referenceScaled);
+        graphData.setReferenceAreaScaled( referenceAreaScaled );
 
-        List<Double> entriesOwaArea = new ArrayList<>();
-        List<Double> commonEntriesOwaArea = new ArrayList<>();
-        List<Double> commonEntriesOwaAreaPercentage = new ArrayList<>();
+        List<Double> entriesAreaScaled = new ArrayList<>();
+        List<Double> commonEntriesAreaScaled = new ArrayList<>();
+        List<Double> commonEntriesAreaPercentageScaled = new ArrayList<>();
         for (int i = 0; i < graphData.getEntries().size(); ++i) {
-            double[] entry = sortEntryToOwa( graphData.getEntryToDouble(i), graphData.getOwaOrder() );
-            entriesOwaArea.add( polygonAreaCalculatorService.calculatePolygonArea(entry) );
-            double commonEntryOwaArea = polygonAreaCalculatorService.calculateCommonPolygonArea( reference, entry );
-            commonEntriesOwaArea.add( commonEntryOwaArea );
+            entriesAreaScaled.add( polygonAreaCalculatorService.calculatePolygonArea( graphData.getEntryScaledToDouble(i)) );
+            double commonEntryAreaScaled = polygonAreaCalculatorService.calculateCommonPolygonArea(referenceScaled,
+                    graphData.getEntryScaledToDouble(i));
+            commonEntriesAreaScaled.add( commonEntryAreaScaled );
 
-            double commonOwaAreaPercentage;
-            if ( referenceOwaArea != 0 ) {
-                commonOwaAreaPercentage = commonEntryOwaArea / referenceOwaArea * 100;
+            double commonAreaPercentageScaled;
+            if ( referenceAreaScaled != 0 ) {
+                commonAreaPercentageScaled = commonEntryAreaScaled / referenceAreaScaled * 100;
             }
             else {
-                commonOwaAreaPercentage = 0;
+                commonAreaPercentageScaled = 0;
             }
-
-            commonEntriesOwaAreaPercentage.add( commonOwaAreaPercentage );
+            commonEntriesAreaPercentageScaled.add( commonAreaPercentageScaled );
         }
-        graphData.setEntriesOwaArea( entriesOwaArea );
-        graphData.setCommonEntriesOwaArea( commonEntriesOwaArea );
-        graphData.setCommonEntriesOwaAreaPercentage( commonEntriesOwaAreaPercentage );
+        graphData.setEntriesAreaScaled( entriesAreaScaled );
+        graphData.setCommonEntriesAreaScaled( commonEntriesAreaScaled );
+        graphData.setCommonEntriesAreaPercentageScaled( commonEntriesAreaPercentageScaled );
     }
 
     /**
-     * Calculates the OWA Order for the reference object of graphData and saves it in the object graphData
+     * Calculates the OWA Order for the reference object and the scaled reference object of graphData
+     * and saves them in the object graphData
      *
      * @param graphData
      */
     public void calculateOwaOrder(GraphData graphData) {
-        List<Integer> owaOrder = new ArrayList<>();
         List<Double> reference = new ArrayList<>(graphData.getReference());
+        List<Double> referenceScaled = new ArrayList<>(graphData.getReferenceScaled());
 
-        int referenceSize = reference.size();
-        for (int i = 0; i < referenceSize; ++i) {
-            int maxPosition = getMaxValuePosition(reference);
-            reference.set(maxPosition, -1.0);
-            owaOrder.add(maxPosition);
-        }
-
-        graphData.setOwaOrder(owaOrder);
+        graphData.setOwaOrder( calculateOwaOrderInList(reference) );
+        graphData.setOwaOrderScaled( calculateOwaOrderInList( referenceScaled ) );
     }
 
     /**
@@ -134,6 +130,50 @@ public class GraphDataService {
     }
 
     /**
+     * Scalates all entries and reference object from graphdata and its area results
+     *
+     * @param graphData
+     */
+    public void calculateScaledChartAndAreaData(GraphData graphData) {
+        List<List<Double>> entries = graphData.getEntries();
+
+        if ( entries.size() > 0 ) {
+            double[][] entriesScaled = new double[entries.size()][entries.get(0).size()];
+
+            for (int i = 0; i < entries.get(i).size(); ++i) {
+                List <Double> columnEntries = new ArrayList<>();
+                for (int j = 0; j < entries.size(); ++j) {
+                    columnEntries.add(entries.get(j).get(i));
+                }
+
+                double minValue = getMinimumValue(columnEntries);
+                double maxValue = getMaximumValue(columnEntries);
+
+                for (int j = 0; j < entries.size(); ++j) {
+                    entriesScaled[j][i] = scaleValue( entries.get(j).get(i), minValue, maxValue );
+                }
+            }
+
+            /**
+             * Convert double[][] to list
+             */
+            List<List<Double>> entriesScaledList = new ArrayList<>();
+            for (int i = 0; i < entriesScaled.length; ++i){
+                List<Double> entryScaledList = new ArrayList<>();
+                for (int j = 0; j < entriesScaled[i].length; ++j){
+                    entryScaledList.add( entriesScaled[i][j] );
+                }
+                entriesScaledList.add( entryScaledList );
+            }
+
+            graphData.setEntriesScaled( entriesScaledList );
+            graphData.setReferenceScaled( entriesScaledList.get(0) );
+
+            calculateScaleAreaData(graphData);
+        }
+    }
+
+    /**
      * Changes the reference object for the entry from the entries table with the index entryId
      *
      * @param graphData
@@ -141,13 +181,33 @@ public class GraphDataService {
      */
     public void changeReferenceObject(GraphData graphData, int entryId) {
         List<Double> newReference = graphData.getEntries().get(entryId);
+        List<Double> newReferenceScaled = graphData.getEntriesScaled().get(entryId);
         if ( newReference != graphData.getReference() ) {
             graphData.setReference( newReference );
+            graphData.setReferenceScaled( newReferenceScaled );
 
             calculateOwaOrder( graphData );
             calculateAreaData( graphData );
-            calculateOwaAreaData( graphData );
+            calculateScaleAreaData( graphData );
         }
+    }
+
+    /**
+     * Calculates the OWA Order for the list
+     *
+     * @param list
+     * @return
+     */
+    private List<Integer> calculateOwaOrderInList(List<Double> list) {
+        List<Integer> owaOrder = new ArrayList<>();;
+        int referenceSize = list.size();
+        for (int i = 0; i < referenceSize; ++i) {
+            int maxPosition = getMaxValuePosition(list);
+            list.set(maxPosition, -1.0);
+            owaOrder.add(maxPosition);
+        }
+
+        return owaOrder;
     }
 
     /**
@@ -166,5 +226,65 @@ public class GraphDataService {
         }
 
         return maxValuePosition;
+    }
+
+    /**
+     * Returns the minimum value of the list, returns -1 otherwise
+     *
+     * @param list
+     * @return
+     */
+    private double getMinimumValue(List<Double> list) {
+        double minValue = -1;
+
+        for (int i = 0; i < list.size(); ++i) {
+            if (i == 0) {
+                minValue = list.get(i);
+            } else if (minValue > list.get(i)) {
+                minValue = list.get(i);
+            }
+        }
+
+        return minValue;
+    }
+
+    /**
+     * Returns the maximum value of the list, returns -1 otherwise
+     *
+     * @param list
+     * @return
+     */
+    private double getMaximumValue(List<Double> list) {
+        double maxValue = -1;
+
+        for (int i = 0; i < list.size(); ++i) {
+            if (i == 0) {
+                maxValue = list.get(i);
+            } else if (maxValue < list.get(i)) {
+                maxValue = list.get(i);
+            }
+        }
+
+        return maxValue;
+    }
+
+    /**
+     * Scales the value between [min, max]
+     *
+     * @param value
+     * @param min
+     * @param max
+     * @return
+     */
+    private double scaleValue( double value, double min, double max ) {
+        double scaledValue;
+        if ( max != min) {
+            scaledValue =  (value - min)/(max - min)*100;
+        }
+        else {
+            scaledValue = 0;
+        }
+
+        return scaledValue;
     }
 }

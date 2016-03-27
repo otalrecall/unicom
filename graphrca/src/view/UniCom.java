@@ -271,6 +271,7 @@ public class UniCom {
         scale = new JCheckBoxMenuItem("Scaled Chart", false);
         scale.setMnemonic(KeyEvent.VK_S);
         scale.addItemListener(new ScaledChart());
+        scale.setEnabled(false);
         chartMenu.add(scale);
 
         JMenu helpMenu = new JMenu("Help");
@@ -375,7 +376,14 @@ public class UniCom {
      * Applies the similarity filter on the entries table and paints the reference object
      */
     private void paintEntriesTable() {
-        List<Double> commonEntriesAreaPercentage = graphData.getCommonEntriesAreaPercentage();
+        List<Double> commonEntriesAreaPercentage;
+
+        if ( scale.isSelected() ) {
+            commonEntriesAreaPercentage = graphData.getCommonEntriesAreaPercentageScaled();
+        }
+        else {
+            commonEntriesAreaPercentage = graphData.getCommonEntriesAreaPercentage();
+        }
 
         List<Integer> filteredRows = new ArrayList<>();
         for (int i  = 0; i < commonEntriesAreaPercentage.size(); ++i) {
@@ -401,7 +409,8 @@ public class UniCom {
      * @param entryId
      */
     private void setNewGraphAndResultTables(int entryId) {
-        setNewGraphController.setNewGraph(chartViewer, graphData, naturalOrderJRadioButton.isSelected(), entryId);
+        setNewGraphController.setNewGraph(chartViewer, graphData, naturalOrderJRadioButton.isSelected(),
+                scale.isSelected(), entryId);
 
         /**
          * Set area table
@@ -409,14 +418,14 @@ public class UniCom {
         double referenceArea;
         double entryArea;
         double commonEntryArea;
-        if (naturalOrderJRadioButton.isSelected()) {
+        if ( !scale.isSelected() ) {
             referenceArea = graphData.getReferenceArea();
-            entryArea = graphData.getEntryArea(entryId);
-            commonEntryArea = graphData.getCommonEntryArea(entryId);
+            entryArea = graphData.getEntriesArea().get(entryId);
+            commonEntryArea = graphData.getCommonEntriesArea().get(entryId);
         } else {
-            referenceArea = graphData.getReferenceOwaArea();
-            entryArea = graphData.getEntryOwaArea(entryId);
-            commonEntryArea = graphData.getCommonEntryOwaArea(entryId);
+            referenceArea = graphData.getReferenceAreaScaled();
+            entryArea = graphData.getEntriesAreaScaled().get(entryId);
+            commonEntryArea = graphData.getCommonEntriesAreaScaled().get(entryId);
         }
         Object[][] graphicAreaTableData = {
                 {"Reference Object", String.format("%.4f", referenceArea)},
@@ -433,10 +442,11 @@ public class UniCom {
         /**
          * Set similarity label
          */
-        if (naturalOrderJRadioButton.isSelected()) {
-            similarityLabel.setText(String.format("%.2f", graphData.getCommonEntryAreaPercentage(entryId)) + "%");
+        if ( !scale.isSelected() ) {
+            similarityLabel.setText(String.format("%.2f", graphData.getCommonEntriesAreaPercentage().get(entryId)) + "%");
         } else {
-            similarityLabel.setText(String.format("%.2f", graphData.getCommonEntryOwaAreaPercentage(entryId)) + "%");
+            similarityLabel.setText(String.format("%.2f", graphData.getCommonEntriesAreaPercentageScaled().get(entryId))
+                    + "%");
         }
     }
 
@@ -519,9 +529,10 @@ public class UniCom {
                     chartViewerJPanel.setVisible(true);
 
                     /**
-                     * Enable 'Generate Results...' menu option
+                     * Enable 'Generate Results...' and 'Scale Chart' menu option
                      */
                     generate.setEnabled(true);
+                    scale.setEnabled(true);
 
                     /**
                      * Set area table
@@ -529,8 +540,8 @@ public class UniCom {
                     String[] graphicAreaTableColumnNames = {"", "Area"};
                     Object[][] graphicAreaTableData = {
                             {"Reference Object", String.format( "%.4f", graphData.getReferenceArea() ) },
-                            {"Compare Object", String.format( "%.4f", graphData.getEntryArea(0) ) },
-                            {"Shared", String.format( "%.4f", graphData.getCommonEntryArea(0) ) }
+                            {"Compare Object", String.format( "%.4f", graphData.getEntriesArea().get(0) ) },
+                            {"Shared", String.format( "%.4f", graphData.getCommonEntriesArea().get(0) ) }
                     };
                     JTable graphicAreaTable = new JTable( new CustomTableModel(graphicAreaTableData,
                             graphicAreaTableColumnNames));
@@ -550,7 +561,8 @@ public class UniCom {
                     /**
                      * Set similarity label
                      */
-                    similarityLabel.setText( String.format( "%.2f", graphData.getCommonEntryAreaPercentage(0) ) + "%" );
+                    similarityLabel.setText( String.format( "%.2f", graphData.getCommonEntriesAreaPercentage().get(0) )
+                            + "%" );
 
                     /**
                      * Set reference color row in entries table
@@ -567,6 +579,11 @@ public class UniCom {
                      */
                     naturalOrderJRadioButton.setSelected(true);
                     compareObjectJRadioButton.setSelected(true);
+
+                    /**
+                     * Set 'Scale Chart' menu option unchecked
+                     */
+                    scale.setSelected(false);
                 }
                 else {
                     JOptionPane.showMessageDialog(null, loadCSVToGraphController.getLoadCSVToGraphError(), "Error!",
@@ -652,12 +669,14 @@ public class UniCom {
 
     private class ScaledChart implements ItemListener {
         public void itemStateChanged(ItemEvent e) {
-            if ( scale.isSelected() ) {
+            JViewport jViewport = entriesScrollPane.getViewport();
+            JTable entriesJTable = (JTable) jViewport.getView();
+            setNewGraphAndResultTables( entriesJTable.getSelectedRow() );
 
-            }
-            else {
-
-            }
+            /**
+             * Repaint for similarity filter
+             */
+            paintEntriesTable();
         }
     }
 
@@ -754,9 +773,11 @@ public class UniCom {
             JTable entriesJTable = (JTable) jViewport.getView();
 
             if ( button.getText().equals("Natural") ) {
-                setNewGraphController.setNewGraph(chartViewer, graphData, true, entriesJTable.getSelectedRow());
+                setNewGraphController.setNewGraph(chartViewer, graphData, true, scale.isSelected(),
+                        entriesJTable.getSelectedRow());
             } else if ( button.getText().equals("OWA") ) {
-                setNewGraphController.setNewGraph(chartViewer, graphData, false, entriesJTable.getSelectedRow());
+                setNewGraphController.setNewGraph(chartViewer, graphData, false, scale.isSelected(),
+                        entriesJTable.getSelectedRow());
             }
         }
     }

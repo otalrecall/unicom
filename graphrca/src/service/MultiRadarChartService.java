@@ -7,6 +7,7 @@ import ChartDirector.PolarChart;
 import model.GraphData;
 
 import java.awt.*;
+import java.util.List;
 
 public class MultiRadarChartService {
 
@@ -53,23 +54,36 @@ public class MultiRadarChartService {
      * @param entryId
      */
     public void compareObjects(ChartViewer chartViewer, GraphData graphData, boolean isNaturalChartAxisOrder,
-                               int entryId) {
+                               boolean isChartScaled, int entryId) {
         /**
          * Apply OWA order
          */
         double[] reference;
         double[] entry;
-        String[] labels;
-        if ( isNaturalChartAxisOrder ) {
-            reference = graphData.getReferenceToDouble();
-            entry = graphData.getEntryToDouble(entryId);
-            labels = new String[graphData.getLabels().size()];
-            graphData.getLabels().toArray(labels);
+        String[] labels = new String[graphData.getLabels().size()];
+        graphData.getLabels().toArray(labels);
+
+        if ( isChartScaled ) {
+            reference = graphData.getReferenceScaledToDouble();
+            entry = graphData.getEntryScaledToDouble(entryId);
         }
         else {
-            reference = graphDataService.sortEntryToOwa( graphData.getReferenceToDouble(), graphData.getOwaOrder() );
-            entry = graphDataService.sortEntryToOwa( graphData.getEntryToDouble(entryId), graphData.getOwaOrder() );
-            labels = graphDataService.sortLabelsToOwa( graphData.getLabels(), graphData.getOwaOrder() );
+            reference = graphData.getReferenceToDouble();
+            entry = graphData.getEntryToDouble(entryId);
+        }
+
+        if ( !isNaturalChartAxisOrder ) {
+            List<Integer> owaOrder;
+            if ( isChartScaled ) {
+                owaOrder = graphData.getOwaOrderScaled();
+            }
+            else {
+                owaOrder = graphData.getOwaOrder();
+            }
+
+            reference = graphDataService.sortEntryToOwa( reference, owaOrder );
+            entry = graphDataService.sortEntryToOwa( entry, owaOrder );
+            labels = graphDataService.sortLabelsToOwa( graphData.getLabels(), owaOrder );
         }
 
         /**

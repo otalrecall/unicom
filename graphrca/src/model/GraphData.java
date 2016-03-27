@@ -23,11 +23,7 @@ public class GraphData {
     private List<Double> commonEntriesAreaPercentageScaled;
 
     private List<Integer> owaOrder;
-
-    private double referenceOwaArea;
-    private List<Double> entriesOwaArea;
-    private List<Double> commonEntriesOwaArea;
-    private List<Double> commonEntriesOwaAreaPercentage;
+    private List<Integer> owaOrderScaled;
 
     public GraphData() {
         labels = new ArrayList<>();
@@ -143,36 +139,12 @@ public class GraphData {
         this.owaOrder = owaOrder;
     }
 
-    public double getReferenceOwaArea() {
-        return referenceOwaArea;
+    public List<Integer> getOwaOrderScaled() {
+        return owaOrderScaled;
     }
 
-    public void setReferenceOwaArea(double referenceOwaArea) {
-        this.referenceOwaArea = referenceOwaArea;
-    }
-
-    public List<Double> getEntriesOwaArea() {
-        return entriesOwaArea;
-    }
-
-    public void setEntriesOwaArea(List<Double> entriesOwaArea) {
-        this.entriesOwaArea = entriesOwaArea;
-    }
-
-    public List<Double> getCommonEntriesOwaArea() {
-        return commonEntriesOwaArea;
-    }
-
-    public void setCommonEntriesOwaArea(List<Double> commonEntriesOwaArea) {
-        this.commonEntriesOwaArea = commonEntriesOwaArea;
-    }
-
-    public List<Double> getCommonEntriesOwaAreaPercentage() {
-        return commonEntriesOwaAreaPercentage;
-    }
-
-    public void setCommonEntriesOwaAreaPercentage(List<Double> commonEntriesOwaAreaPercentage) {
-        this.commonEntriesOwaAreaPercentage = commonEntriesOwaAreaPercentage;
+    public void setOwaOrderScaled(List<Integer> owaOrderScaled) {
+        this.owaOrderScaled = owaOrderScaled;
     }
 
     public void setCommonEntriesAreaPercentage(List<Double> commonEntriesAreaPercentage) {
@@ -193,6 +165,19 @@ public class GraphData {
     }
 
     /**
+     * Tranforms the scaled reference list object to an array of double
+     *
+     * @return
+     */
+    public double[] getReferenceScaledToDouble() {
+        double[] referenceScaledDouble = new double[referenceScaled.size()];
+        for (int i = 0; i < referenceScaledDouble.length; i++) {
+            referenceScaledDouble[i] = referenceScaled.get(i);
+        }
+        return referenceScaledDouble;
+    }
+
+    /**
      * Gets an entry as an array of double from the list of entries
      *
      * @param entryId
@@ -207,63 +192,17 @@ public class GraphData {
     }
 
     /**
-     * Gets the area of a given entry id
+     * Gets an scaled entry as an array of double from the list of entries
      *
      * @param entryId
      * @return
      */
-    public double getEntryArea(int entryId) {
-        return entriesArea.get(entryId);
-    }
-
-    /**
-     * Gets the OWA area of a given entry id
-     *
-     * @param entryId
-     * @return
-     */
-    public double getEntryOwaArea(int entryId) {
-        return entriesOwaArea.get(entryId);
-    }
-
-    /**
-     * Gets the common area of a given entry id
-     *
-     * @param entryId
-     * @return
-     */
-    public double getCommonEntryArea(int entryId) {
-        return commonEntriesArea.get(entryId);
-    }
-
-    /**
-     * Gets the common OWA area of a given entry id
-     *
-     * @param entryId
-     * @return
-     */
-    public double getCommonEntryOwaArea(int entryId) {
-        return commonEntriesOwaArea.get(entryId);
-    }
-
-    /**
-     * Gets the percentage of common area of a given entry id
-     *
-     * @param entryId
-     * @return
-     */
-    public double getCommonEntryAreaPercentage(int entryId) {
-        return commonEntriesAreaPercentage.get(entryId);
-    }
-
-    /**
-     * Gets the percentage of common OWA area of a given entry id
-     *
-     * @param entryId
-     * @return
-     */
-    public double getCommonEntryOwaAreaPercentage(int entryId) {
-        return commonEntriesOwaAreaPercentage.get(entryId);
+    public double[] getEntryScaledToDouble(int entryId) {
+        double[] entryScaled = new double[entriesScaled.get(entryId).size()];
+        for (int i = 0; i < entryScaled.length; i++) {
+            entryScaled[i] = entriesScaled.get(entryId).get(i);
+        }
+        return entryScaled;
     }
 
     /**

@@ -47,12 +47,13 @@ public class LoadCSVToGraphController {
             List<List<String>> entries = csvService.readCSV(path);
             graphData = csvService.formatGraphData(entries);
 
-            graphDataService.calculateOwaOrder(graphData);
+            graphDataService.calculateScaledChartAndAreaData(graphData);
             graphDataService.calculateAreaData(graphData);
-            graphDataService.calculateOwaAreaData(graphData);
+
+            graphDataService.calculateOwaOrder(graphData);
 
             multiRadarChartService.createChart();
-            multiRadarChartService.compareObjects(chartViewer, graphData, true, 0);
+            multiRadarChartService.compareObjects(chartViewer, graphData, true, false, 0);
             chartViewer.setVisible(true);
         }
         catch (NumberFormatException nfe) {
