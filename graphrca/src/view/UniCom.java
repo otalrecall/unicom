@@ -134,7 +134,7 @@ public class UniCom {
         selectOrderControlJPanel = new JPanel();
         selectOrderControlJPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 0));
         selectOrderControlJPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        selectOrderControlJPanel.setBorder(BorderFactory.createTitledBorder("Chart Axis Order"));
+        selectOrderControlJPanel.setBorder(BorderFactory.createTitledBorder("Chart Axes Order"));
         selectOrderControlJPanel.add(naturalOrderJRadioButton);
         selectOrderControlJPanel.add(owaOrderJRadioButton);
 
