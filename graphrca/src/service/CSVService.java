@@ -82,7 +82,7 @@ public class CSVService {
         for (int i = 0; i < labels.size(); ++i) {
             csv += labels.get(i) + ";";
         }
-        csv += "Area;Common Area;Common Percentage;Scaled Area, Scaled Common Area;Scaled Common Percentage" + newline;
+        csv += "Area;Common Area;Common Percentage;Scaled Area;Scaled Common Area;Scaled Common Percentage" + newline;
 
         List<Double> reference = graphData.getReference();
         for (int i = 0; i < reference.size(); ++i) {
