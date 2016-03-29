@@ -1,7 +1,7 @@
-import view.UniCom;
+import view.UniComView;
 
 public class Main {
     public static void main(String[] args) {
-        new UniCom();
+        new UniComView();
     }
 }

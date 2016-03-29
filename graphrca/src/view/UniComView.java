@@ -31,7 +31,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UniCom {
+public class UniComView {
 
     private JFrame frame;
     private GridBagConstraints gridBagConstraints;
@@ -64,7 +64,7 @@ public class UniCom {
     private SetNewGraphController setNewGraphController;
     private GenerateCSVController generateCSVController;
 
-    public UniCom() {
+    public UniComView() {
         loadCSVToGraphController = new LoadCSVToGraphController();
         setNewGraphController = new SetNewGraphController();
         generateCSVController = new GenerateCSVController();
@@ -686,7 +686,7 @@ public class UniCom {
                 String inputPdf = "resources/manual.pdf";
                 Path tempOutput = Files.createTempFile("TempManual", ".pdf");
                 tempOutput.toFile().deleteOnExit();
-                try ( InputStream is = UniCom.class.getClassLoader().getResourceAsStream(inputPdf) ) {
+                try ( InputStream is = UniComView.class.getClassLoader().getResourceAsStream(inputPdf) ) {
                     Files.copy(is, tempOutput, StandardCopyOption.REPLACE_EXISTING);
                 }
                 if ( Desktop.isDesktopSupported() ) {
