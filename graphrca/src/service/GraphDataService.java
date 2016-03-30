@@ -140,7 +140,7 @@ public class GraphDataService {
         if ( entries.size() > 0 ) {
             double[][] entriesScaled = new double[entries.size()][entries.get(0).size()];
 
-            for (int i = 0; i < entries.get(i).size(); ++i) {
+            for (int i = 0; i < entries.get(0).size(); ++i) {
                 List <Double> columnEntries = new ArrayList<>();
                 for (int j = 0; j < entries.size(); ++j) {
                     columnEntries.add(entries.get(j).get(i));
