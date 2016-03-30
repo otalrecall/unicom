@@ -6,10 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7489d312-4d0c-49b9-8566-83ba949684fa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/service/GraphDataService.class" afterPath="$PROJECT_DIR$/out/production/graphrca/service/GraphDataService.class" />
+    <list default="true" id="7489d312-4d0c-49b9-8566-83ba949684fa" name="Default" comment="Delete unnecessary imports, change method to private">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/GraphDataService.java" afterPath="$PROJECT_DIR$/src/service/GraphDataService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/UniComView.java" afterPath="$PROJECT_DIR$/src/view/UniComView.java" />
     </list>
     <ignored path="graphrca.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UniComView.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UniComView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/view/UniComView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="316" column="24" selection-start-line="316" selection-start-column="24" selection-end-line="316" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.55778897">
+              <caret line="115" column="94" selection-start-line="115" selection-start-column="94" selection-end-line="115" selection-end-column="94" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/src/controller/SetNewGraphController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/src/service/MultiRadarChartService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="76" column="28" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="28" />
+              <caret line="56" column="66" selection-start-line="55" selection-start-column="16" selection-end-line="56" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -130,17 +129,17 @@
         <entry file="file://$PROJECT_DIR$/src/service/PolygonAreaCalculatorService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+              <caret line="84" column="120" selection-start-line="84" selection-start-column="19" selection-end-line="84" selection-end-column="120" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GraphDataService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GraphDataService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/service/GraphDataService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16172507">
-              <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
+            <state vertical-scroll-proportion="-32.77778">
+              <caret line="61" column="59" selection-start-line="61" selection-start-column="59" selection-end-line="61" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -196,8 +195,8 @@
         <option value="$PROJECT_DIR$/src/service/CSVService.java" />
         <option value="$PROJECT_DIR$/src/view/UniCom.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/view/UniComView.java" />
         <option value="$PROJECT_DIR$/src/service/GraphDataService.java" />
+        <option value="$PROJECT_DIR$/src/view/UniComView.java" />
       </list>
     </option>
   </component>
@@ -901,7 +900,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459352106755</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Delete unnecessary imports, change method to private">
+      <created>1459359719265</created>
+      <option name="number" value="00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1459359719265</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -968,7 +973,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add reference object to the entries table" />
     <MESSAGE value="Change program name to UniCom" />
     <MESSAGE value="Show decimals only when necessary in the entries table" />
     <MESSAGE value="Fix bug when loads a csv with errors while there is another csv loaded" />
@@ -993,7 +997,8 @@
     <MESSAGE value="Update manual" />
     <MESSAGE value="Rename UniCom view" />
     <MESSAGE value="Fix bug with index out of bounds" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bug with index out of bounds" />
+    <MESSAGE value="Delete unnecessary imports, change method to private" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete unnecessary imports, change method to private" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1395,39 +1400,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/UniComView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="316" column="24" selection-start-line="316" selection-start-column="24" selection-end-line="316" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/PolygonAreaCalculatorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/GenerateCSVController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/SetNewGraphController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1451,20 +1428,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/MultiRadarChartService.java">
+    <entry file="file://$PROJECT_DIR$/src/service/GraphDataService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="28" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="28" />
+        <state vertical-scroll-proportion="-32.77778">
+          <caret line="61" column="59" selection-start-line="61" selection-start-column="59" selection-end-line="61" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/GraphDataService.java">
+    <entry file="file://$PROJECT_DIR$/src/service/MultiRadarChartService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16172507">
-          <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="66" selection-start-line="55" selection-start-column="16" selection-end-line="56" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/PolygonAreaCalculatorService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="84" column="120" selection-start-line="84" selection-start-column="19" selection-end-line="84" selection-end-column="120" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/SetNewGraphController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/UniComView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55778897">
+          <caret line="115" column="94" selection-start-line="115" selection-start-column="94" selection-end-line="115" selection-end-column="94" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

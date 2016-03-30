@@ -110,7 +110,7 @@ public class UniComView {
 
         similarityFilterScrollBar = new JScrollBar(JScrollBar.HORIZONTAL, 0, 0, 0, 100);
         similarityFilterScrollBar.setPreferredSize( new Dimension(140, 20) );
-        similarityFilterScrollBar.setToolTipText("Overshadows the object rows with a similarity percentage lower than " +
+        similarityFilterScrollBar.setToolTipText("Overshadows the object rows with a lower similarity percentage than " +
                 "the selected one");
         BoundedRangeModel similarityScrollBarModel = similarityFilterScrollBar.getModel();
         similarityScrollBarModel.addChangeListener( new SimilarityScrollBarChangeListener() );
