@@ -3,9 +3,7 @@ package service;
 import model.GraphData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 public class GraphDataService {
 
@@ -55,7 +53,7 @@ public class GraphDataService {
      *
      * @param graphData
      */
-    public void calculateScaleAreaData(GraphData graphData) {
+    private void calculateScaleAreaData(GraphData graphData) {
         double[] referenceScaled = graphData.getReferenceScaledToDouble();
         double referenceAreaScaled = polygonAreaCalculatorService.calculatePolygonArea(referenceScaled);
         graphData.setReferenceAreaScaled( referenceAreaScaled );
