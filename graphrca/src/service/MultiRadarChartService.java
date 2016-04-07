@@ -64,12 +64,12 @@ public class MultiRadarChartService {
         graphData.getLabels().toArray(labels);
 
         if ( isChartScaled ) {
-            reference = graphData.getReferenceScaledToDouble();
-            entry = graphData.getEntryScaledToDouble(entryId);
+            reference = graphData.getGraphTableDataScaled().getReferenceToDouble();
+            entry = graphData.getGraphTableDataScaled().getEntryToDouble(entryId);
         }
         else {
-            reference = graphData.getReferenceToDouble();
-            entry = graphData.getEntryToDouble(entryId);
+            reference = graphData.getGraphTableData().getReferenceToDouble();
+            entry = graphData.getGraphTableData().getEntryToDouble(entryId);
         }
 
         if ( !isNaturalChartAxisOrder ) {

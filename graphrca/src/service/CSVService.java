@@ -84,28 +84,30 @@ public class CSVService {
         }
         csv += "Area;Common Area;Common Percentage;Scaled Area;Scaled Common Area;Scaled Common Percentage" + newline;
 
-        List<Double> reference = graphData.getReference();
+
+        List<Double> reference = graphData.getGraphTableData().getReference();
         for (int i = 0; i < reference.size(); ++i) {
             csv += reference.get(i) + ";";
         }
-        csv += String.format( "%.4f", graphData.getReferenceArea() ) + ";" +
-                String.format( "%.4f", graphData.getReferenceArea() ) + ";100;" +
-                String.format( "%.4f", graphData.getReferenceAreaScaled() ) +
-                String.format( "%.4f", graphData.getReferenceAreaScaled() )  + ";100" + newline;
+        csv += String.format( "%.4f", graphData.getGraphAreaData().getReferenceArea() ) + ";" +
+                String.format( "%.4f", graphData.getGraphAreaData().getReferenceArea() ) + ";100;" +
+                String.format( "%.4f", graphData.getGraphAreaDataScaled().getReferenceArea() ) +
+                String.format( "%.4f", graphData.getGraphAreaDataScaled().getReferenceArea() )  + ";100" + newline;
 
         csv += newline;
 
-        List<List<Double>> entries = graphData.getEntries();
+        List<List<Double>> entries = graphData.getGraphTableData().getEntries();
         for (int i = 0; i < entries.size(); ++i) {
             for (int j = 0; j < entries.get(i).size(); ++j) {
                 csv += entries.get(i).get(j) + ";";
             }
-            csv += String.format( "%.4f", graphData.getEntriesArea().get(i) ) + ";" +
-                    String.format( "%.4f", graphData.getCommonEntriesArea().get(i) ) + ";" +
-                    String.format( "%.2f", graphData.getCommonEntriesAreaPercentage().get(i) ) + ";" +
-                    String.format( "%.4f", graphData.getEntriesAreaScaled().get(i) ) + ";" +
-                    String.format( "%.4f", graphData.getCommonEntriesAreaScaled().get(i) ) + ";" +
-                    String.format( "%.2f", graphData.getCommonEntriesAreaPercentageScaled().get(i) ) + newline;
+            csv += String.format( "%.4f", graphData.getGraphAreaData().getEntriesArea().get(i) ) + ";" +
+                    String.format( "%.4f", graphData.getGraphAreaData().getCommonEntriesArea().get(i) ) + ";" +
+                    String.format( "%.2f", graphData.getGraphAreaData().getCommonEntriesAreaPercentage().get(i) ) + ";" +
+                    String.format( "%.4f", graphData.getGraphAreaDataScaled().getEntriesArea().get(i) ) + ";" +
+                    String.format( "%.4f", graphData.getGraphAreaDataScaled().getCommonEntriesArea().get(i) ) + ";" +
+                    String.format( "%.2f", graphData.getGraphAreaDataScaled().getCommonEntriesAreaPercentage().get(i) )
+                    + newline;
         }
 
         return csv;
@@ -120,7 +122,7 @@ public class CSVService {
     public GraphData formatGraphData(List<List<String>> csvList) {
         GraphData graphData = new GraphData();
 
-        List<List<Double>> entries = graphData.getEntries();
+        List<List<Double>> entries = graphData.getGraphTableData().getEntries();
         for (int i = 0; i < csvList.size(); ++i) {
             if (i == 0) {
                 List<String> labels = csvList.get(i);
@@ -139,8 +141,8 @@ public class CSVService {
                 entries.add(entry);
             }
         }
-        graphData.setReference( entries.get(0) );
-        graphData.setEntries( entries );
+        graphData.getGraphTableData().setReference( entries.get(0) );
+        graphData.getGraphTableData().setEntries( entries );
 
         return graphData;
     }

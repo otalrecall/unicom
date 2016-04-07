@@ -47,12 +47,18 @@ public class LoadCSVToGraphController {
             List<List<String>> entries = csvService.readCSV(path);
             graphData = csvService.formatGraphData(entries);
 
-            graphDataService.calculateScaledChartAndAreaData(graphData);
-            graphDataService.calculateAreaData(graphData);
+            graphDataService.scaleTableData(graphData);
 
             graphDataService.calculateOwaOrder(graphData);
-            graphDataService.calculateOwaAreaData(graphData);
-            graphDataService.calculateScaleOwaAreaData(graphData);
+
+            graphDataService.calculateAreaData( graphData.getGraphTableData(), graphData.getGraphAreaData(), false,
+                    graphData.getOwaOrder() );
+            graphDataService.calculateAreaData( graphData.getGraphTableDataScaled(), graphData.getGraphAreaDataScaled(), false,
+                    graphData.getOwaOrderScaled() );
+            graphDataService.calculateAreaData( graphData.getGraphTableData(), graphData.getGraphAreaDataOwa(), true,
+                    graphData.getOwaOrder() );
+            graphDataService.calculateAreaData( graphData.getGraphTableDataScaled(), graphData.getGraphAreaDataScaledOwa(), true,
+                    graphData.getOwaOrderScaled() );
 
             multiRadarChartService.createChart();
             multiRadarChartService.compareObjects(chartViewer, graphData, true, false, 0);
