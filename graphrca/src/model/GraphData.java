@@ -22,6 +22,16 @@ public class GraphData {
     private List<Double> commonEntriesAreaScaled;
     private List<Double> commonEntriesAreaPercentageScaled;
 
+    private double referenceAreaOwa;
+    private List<Double> entriesAreaOwa;
+    private List<Double> commonEntriesAreaOwa;
+    private List<Double> commonEntriesAreaPercentageOwa;
+
+    private double referenceAreaScaledOwa;
+    private List<Double> entriesAreaScaledOwa;
+    private List<Double> commonEntriesAreaScaledOwa;
+    private List<Double> commonEntriesAreaPercentageScaledOwa;
+
     private List<Integer> owaOrder;
     private List<Integer> owaOrderScaled;
 
@@ -131,6 +141,10 @@ public class GraphData {
         return commonEntriesAreaPercentage;
     }
 
+    public void setCommonEntriesAreaPercentage(List<Double> commonEntriesAreaPercentage) {
+        this.commonEntriesAreaPercentage = commonEntriesAreaPercentage;
+    }
+
     public List<Integer> getOwaOrder() {
         return owaOrder;
     }
@@ -147,8 +161,68 @@ public class GraphData {
         this.owaOrderScaled = owaOrderScaled;
     }
 
-    public void setCommonEntriesAreaPercentage(List<Double> commonEntriesAreaPercentage) {
-        this.commonEntriesAreaPercentage = commonEntriesAreaPercentage;
+    public double getReferenceAreaOwa() {
+        return referenceAreaOwa;
+    }
+
+    public void setReferenceAreaOwa(double referenceAreaOwa) {
+        this.referenceAreaOwa = referenceAreaOwa;
+    }
+
+    public List<Double> getEntriesAreaOwa() {
+        return entriesAreaOwa;
+    }
+
+    public void setEntriesAreaOwa(List<Double> entriesAreaOwa) {
+        this.entriesAreaOwa = entriesAreaOwa;
+    }
+
+    public List<Double> getCommonEntriesAreaOwa() {
+        return commonEntriesAreaOwa;
+    }
+
+    public void setCommonEntriesAreaOwa(List<Double> commonEntriesAreaOwa) {
+        this.commonEntriesAreaOwa = commonEntriesAreaOwa;
+    }
+
+    public List<Double> getCommonEntriesAreaPercentageOwa() {
+        return commonEntriesAreaPercentageOwa;
+    }
+
+    public void setCommonEntriesAreaPercentageOwa(List<Double> commonEntriesAreaPercentageOwa) {
+        this.commonEntriesAreaPercentageOwa = commonEntriesAreaPercentageOwa;
+    }
+
+    public double getReferenceAreaScaledOwa() {
+        return referenceAreaScaledOwa;
+    }
+
+    public void setReferenceAreaScaledOwa(double referenceAreaScaledOwa) {
+        this.referenceAreaScaledOwa = referenceAreaScaledOwa;
+    }
+
+    public List<Double> getEntriesAreaScaledOwa() {
+        return entriesAreaScaledOwa;
+    }
+
+    public void setEntriesAreaScaledOwa(List<Double> entriesAreaScaledOwa) {
+        this.entriesAreaScaledOwa = entriesAreaScaledOwa;
+    }
+
+    public List<Double> getCommonEntriesAreaScaledOwa() {
+        return commonEntriesAreaScaledOwa;
+    }
+
+    public void setCommonEntriesAreaScaledOwa(List<Double> commonEntriesAreaScaledOwa) {
+        this.commonEntriesAreaScaledOwa = commonEntriesAreaScaledOwa;
+    }
+
+    public List<Double> getCommonEntriesAreaPercentageScaledOwa() {
+        return commonEntriesAreaPercentageScaledOwa;
+    }
+
+    public void setCommonEntriesAreaPercentageScaledOwa(List<Double> commonEntriesAreaPercentageScaledOwa) {
+        this.commonEntriesAreaPercentageScaledOwa = commonEntriesAreaPercentageScaledOwa;
     }
 
     /**

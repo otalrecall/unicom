@@ -51,6 +51,8 @@ public class LoadCSVToGraphController {
             graphDataService.calculateAreaData(graphData);
 
             graphDataService.calculateOwaOrder(graphData);
+            graphDataService.calculateOwaAreaData(graphData);
+            graphDataService.calculateScaleOwaAreaData(graphData);
 
             multiRadarChartService.createChart();
             multiRadarChartService.compareObjects(chartViewer, graphData, true, false, 0);

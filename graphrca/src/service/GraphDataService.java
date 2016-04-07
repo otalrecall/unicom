@@ -48,6 +48,41 @@ public class GraphDataService {
     }
 
     /**
+     * Calculates all the OWA areas for every polygon in the set of graphs graphData (reference and select objects, along with
+     * their common area)
+     *
+     * @param graphData
+     */
+    public void calculateOwaAreaData(GraphData graphData) {
+        double[] reference = sortEntryToOwa( graphData.getReferenceToDouble(), graphData.getOwaOrder() );
+        double referenceOwaArea = polygonAreaCalculatorService.calculatePolygonArea(reference);
+        graphData.setReferenceAreaOwa( referenceOwaArea );
+
+        List<Double> entriesOwaArea = new ArrayList<>();
+        List<Double> commonEntriesOwaArea = new ArrayList<>();
+        List<Double> commonEntriesOwaAreaPercentage = new ArrayList<>();
+        for (int i = 0; i < graphData.getEntries().size(); ++i) {
+            double[] entry = sortEntryToOwa( graphData.getEntryToDouble(i), graphData.getOwaOrder() );
+            entriesOwaArea.add( polygonAreaCalculatorService.calculatePolygonArea(entry) );
+            double commonEntryOwaArea = polygonAreaCalculatorService.calculateCommonPolygonArea( reference, entry );
+            commonEntriesOwaArea.add( commonEntryOwaArea );
+
+            double commonOwaAreaPercentage;
+            if ( referenceOwaArea != 0 ) {
+                commonOwaAreaPercentage = commonEntryOwaArea / referenceOwaArea * 100;
+            }
+            else {
+                commonOwaAreaPercentage = 0;
+            }
+
+            commonEntriesOwaAreaPercentage.add( commonOwaAreaPercentage );
+        }
+        graphData.setEntriesAreaOwa( entriesOwaArea );
+        graphData.setCommonEntriesAreaOwa( commonEntriesOwaArea );
+        graphData.setCommonEntriesAreaPercentageOwa( commonEntriesOwaAreaPercentage );
+    }
+
+    /**
      * Calculates all the Scaled areas for every polygon in the set of graphs graphData (reference and select objects, along with
      * their common area)
      *
@@ -79,6 +114,42 @@ public class GraphDataService {
         graphData.setEntriesAreaScaled( entriesAreaScaled );
         graphData.setCommonEntriesAreaScaled( commonEntriesAreaScaled );
         graphData.setCommonEntriesAreaPercentageScaled( commonEntriesAreaPercentageScaled );
+    }
+
+
+    /**
+     * Calculates all the Scaled OWA areas for every polygon in the set of graphs graphData (reference and select objects,
+     * along with their common area)
+     *
+     * @param graphData
+     */
+    public void calculateScaleOwaAreaData(GraphData graphData) {
+        double[] reference = sortEntryToOwa( graphData.getReferenceScaledToDouble(), graphData.getOwaOrder() );
+        double referenceOwaAreaScaled = polygonAreaCalculatorService.calculatePolygonArea(reference);
+        graphData.setReferenceAreaScaledOwa( referenceOwaAreaScaled );
+
+        List<Double> entriesOwaAreaScaled = new ArrayList<>();
+        List<Double> commonEntriesOwaAreaScaled = new ArrayList<>();
+        List<Double> commonEntriesOwaAreaPercentageScaled = new ArrayList<>();
+        for (int i = 0; i < graphData.getEntries().size(); ++i) {
+            double[] entry = sortEntryToOwa( graphData.getEntryScaledToDouble(i), graphData.getOwaOrder() );
+            entriesOwaAreaScaled.add( polygonAreaCalculatorService.calculatePolygonArea(entry) );
+            double commonEntryOwaAreaScaled = polygonAreaCalculatorService.calculateCommonPolygonArea( reference, entry );
+            commonEntriesOwaAreaScaled.add( commonEntryOwaAreaScaled );
+
+            double commonOwaAreaPercentageScaled;
+            if ( referenceOwaAreaScaled != 0 ) {
+                commonOwaAreaPercentageScaled = commonEntryOwaAreaScaled / referenceOwaAreaScaled * 100;
+            }
+            else {
+                commonOwaAreaPercentageScaled = 0;
+            }
+
+            commonEntriesOwaAreaPercentageScaled.add( commonOwaAreaPercentageScaled );
+        }
+        graphData.setEntriesAreaScaledOwa( entriesOwaAreaScaled );
+        graphData.setCommonEntriesAreaScaledOwa( commonEntriesOwaAreaScaled );
+        graphData.setCommonEntriesAreaPercentageScaledOwa( commonEntriesOwaAreaPercentageScaled );
     }
 
     /**
@@ -187,6 +258,8 @@ public class GraphDataService {
             calculateOwaOrder( graphData );
             calculateAreaData( graphData );
             calculateScaleAreaData( graphData );
+            calculateOwaAreaData( graphData );
+            calculateScaleOwaAreaData( graphData );
         }
     }
 
