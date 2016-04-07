@@ -7,19 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7489d312-4d0c-49b9-8566-83ba949684fa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/GraphAreaData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/GraphTableData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/controller/LoadCSVToGraphController.class" afterPath="$PROJECT_DIR$/out/production/graphrca/controller/LoadCSVToGraphController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/model/GraphData.class" afterPath="$PROJECT_DIR$/out/production/graphrca/model/GraphData.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/service/GraphDataService.class" afterPath="$PROJECT_DIR$/out/production/graphrca/service/GraphDataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/service/MultiRadarChartService.class" afterPath="$PROJECT_DIR$/out/production/graphrca/service/MultiRadarChartService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/LoadCSVToGraphController.java" afterPath="$PROJECT_DIR$/src/controller/LoadCSVToGraphController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/GraphData.java" afterPath="$PROJECT_DIR$/src/model/GraphData.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/CSVService.java" afterPath="$PROJECT_DIR$/src/service/CSVService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/GraphDataService.java" afterPath="$PROJECT_DIR$/src/service/GraphDataService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/MultiRadarChartService.java" afterPath="$PROJECT_DIR$/src/service/MultiRadarChartService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/UniComView.java" afterPath="$PROJECT_DIR$/src/view/UniComView.java" />
     </list>
     <ignored path="graphrca.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -83,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/src/model/GraphTableData.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+              <caret line="62" column="34" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -95,7 +84,7 @@
         <entry file="file://$PROJECT_DIR$/src/model/GraphAreaData.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+              <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="24" />
               <folding>
                 <element signature="e#371#372#0" expanded="true" />
                 <element signature="e#421#422#0" expanded="true" />
@@ -104,11 +93,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CSVService.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CSVService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/service/CSVService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="121" column="30" selection-start-line="121" selection-start-column="30" selection-end-line="121" selection-end-column="30" />
+            <state vertical-scroll-proportion="1.7744565">
+              <caret line="121" column="20" selection-start-line="121" selection-start-column="20" selection-end-line="121" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -148,11 +137,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GraphDataService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GraphDataService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/service/GraphDataService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.679348">
-              <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="114" column="30" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -209,10 +198,10 @@
         <option value="$PROJECT_DIR$/src/model/GraphTableData.java" />
         <option value="$PROJECT_DIR$/src/model/GraphData.java" />
         <option value="$PROJECT_DIR$/src/service/MultiRadarChartService.java" />
-        <option value="$PROJECT_DIR$/src/service/CSVService.java" />
         <option value="$PROJECT_DIR$/src/controller/LoadCSVToGraphController.java" />
         <option value="$PROJECT_DIR$/src/service/GraphDataService.java" />
         <option value="$PROJECT_DIR$/src/view/UniComView.java" />
+        <option value="$PROJECT_DIR$/src/service/CSVService.java" />
       </list>
     </option>
   </component>
@@ -940,7 +929,13 @@
       <option name="project" value="LOCAL" />
       <updated>1460039897143</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Separate GraphData into GraphAreaData and GraphTableData">
+      <created>1460057455517</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1460057455517</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1008,7 +1003,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add manual and code to open it from the menu bar" />
     <MESSAGE value="Add manual and code to open it from the menu bar, import project to java 8" />
     <MESSAGE value="Add UniCom icon" />
     <MESSAGE value="Add interface options for changing chart axis order and changing the reference object" />
@@ -1033,7 +1027,8 @@
     <MESSAGE value="Fix typo" />
     <MESSAGE value="Upload manual" />
     <MESSAGE value="Set OWA areas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Set OWA areas" />
+    <MESSAGE value="Separate GraphData into GraphAreaData and GraphTableData" />
+    <option name="LAST_COMMIT_MESSAGE" value="Separate GraphData into GraphAreaData and GraphTableData" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1410,48 +1405,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/CSVService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="121" column="30" selection-start-line="121" selection-start-column="30" selection-end-line="121" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/GraphTableData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/GraphAreaData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-          <folding>
-            <element signature="e#371#372#0" expanded="true" />
-            <element signature="e#421#422#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/GraphData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1038#1039#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/LoadCSVToGraphController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1480,10 +1433,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/GraphData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1038#1039#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/GraphAreaData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="24" />
+          <folding>
+            <element signature="e#371#372#0" expanded="true" />
+            <element signature="e#421#422#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/GraphTableData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="34" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/service/GraphDataService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.679348">
-          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="114" column="30" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/CSVService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.7744565">
+          <caret line="121" column="20" selection-start-line="121" selection-start-column="20" selection-end-line="121" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
