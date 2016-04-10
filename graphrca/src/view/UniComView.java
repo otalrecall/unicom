@@ -1,6 +1,7 @@
 package view;
 
 import ChartDirector.ChartViewer;
+import controller.ExtractChartController;
 import controller.GenerateCSVController;
 import controller.LoadCSVToGraphController;
 import controller.SetNewGraphController;
@@ -56,6 +57,7 @@ public class UniComView {
     private JCheckBox similarityFilterJCheckBox;
     private JLabel similarityFilterJLabel;
     private JMenuItem generate;
+    private JMenuItem extractChart;
     private JCheckBoxMenuItem scale;
 
     private boolean graphSelectionHandlerIsFired;
@@ -63,10 +65,12 @@ public class UniComView {
     private LoadCSVToGraphController loadCSVToGraphController;
     private SetNewGraphController setNewGraphController;
     private GenerateCSVController generateCSVController;
+    private ExtractChartController extractChartController;
 
     public UniComView() {
         loadCSVToGraphController = new LoadCSVToGraphController();
-        setNewGraphController = new SetNewGraphController();
+        setNewGraphController = new SetNewGraphController(loadCSVToGraphController);
+        extractChartController = new ExtractChartController(loadCSVToGraphController);
         generateCSVController = new GenerateCSVController();
         initComponents();
     }
@@ -257,10 +261,16 @@ public class UniComView {
         generate.setEnabled(false);
         fileMenu.add(generate);
 
+        extractChart = new JMenuItem("Extract Chart Image", KeyEvent.VK_E);
+        extractChart.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
+        extractChart.addActionListener(new ExtractChart());
+        extractChart.setEnabled(false);
+        fileMenu.add(extractChart);
+
         fileMenu.addSeparator();
 
         JMenuItem quit = new JMenuItem("Quit UniCom", KeyEvent.VK_Q);
-        quit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
+        quit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, ActionEvent.ALT_MASK));
         quit.addActionListener(new QuitUniCom());
         fileMenu.add(quit);
 
@@ -542,91 +552,127 @@ public class UniComView {
 
             if (rVal == JFileChooser.APPROVE_OPTION) {
                 String filename = jFileChooser.getSelectedFile().getName();
+                String extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
                 String path = jFileChooser.getCurrentDirectory().toString() + "/";
-                GraphData graphDataTemp = loadCSVToGraphController.loadCSVToGraph(chartViewer, path + filename);
 
-                /**
-                 * Load graph or show errors to the user if any
-                 */
-                if ( loadCSVToGraphController.getLoadCSVToGraphError().isEmpty() ) {
-                    graphData = graphDataTemp;
-                    setEntriesScrollPane( graphData.getLabels(), graphData.getGraphTableData().getEntries() );
-
-                    /**
-                     * Set visibility on the interface
-                     */
-                    loadCSVButton.setVisible(false);
-                    similarityLabel.setVisible(true);
-                    similarityLabel.setOpaque(true);
-                    entriesScrollPane.setVisible(true);
-                    graphicAreaScrollPane.setVisible(true);
-                    controlPanelJPanel.setVisible(true);
-                    chartViewerJPanel.setVisible(true);
-
-                    /**
-                     * Enable 'Generate Results...' and 'Scale Chart' menu option
-                     */
-                    generate.setEnabled(true);
-                    scale.setEnabled(true);
-
-                    /**
-                     * Set area table
-                     */
-                    String[] graphicAreaTableColumnNames = {"", "Area"};
-                    Object[][] graphicAreaTableData = {
-                            {"Reference Object", String.format( "%.4f", graphData.getGraphAreaData().getReferenceArea() ) },
-                            {"Compare Object", String.format( "%.4f", graphData.getGraphAreaData().getEntriesArea().get(0) ) },
-                            {"Shared", String.format( "%.4f", graphData.getGraphAreaData().getCommonEntriesArea().get(0) ) }
-                    };
-                    JTable graphicAreaTable = new JTable( new CustomTableModel(graphicAreaTableData,
-                            graphicAreaTableColumnNames));
-                    graphicAreaTable.setRowSelectionAllowed(false);
-                    graphicAreaTable.getTableHeader().setReorderingAllowed(false);
-                    graphicAreaScrollPane.setViewportView(graphicAreaTable);
-
-                    /**
-                     * Set dimension of graphicAreaScrollPane from the dimension of the table
-                     */
-                    Dimension graphicAreaTablePreferredSize = graphicAreaTable.getPreferredSize();
-                    graphicAreaScrollPane.setPreferredSize( new Dimension(graphicAreaTablePreferredSize.width,
-                            graphicAreaTable.getRowHeight()*4 + 5) );
-                    graphicAreaScrollPane.setMinimumSize( new Dimension(graphicAreaTablePreferredSize.width,
-                            graphicAreaTable.getRowHeight()*4 + 5) );
-
-                    /**
-                     * Set similarity label
-                     */
-                    similarityLabel.setText( String.format( "%.2f",
-                            graphData.getGraphAreaData().getCommonEntriesAreaPercentage().get(0) ) + "%" );
-
-                    /**
-                     * Set reference color row in entries table
-                     */
-                    paintEntriesTable();
-
-                    /**
-                     * Set similarity filter bar to 0
-                     */
-                    similarityFilterScrollBar.setValue(0);
-
-                    /**
-                     * Set chart axis order to 'Natural' and selector to 'Compare Object'
-                     */
-                    naturalOrderJRadioButton.setSelected(true);
-                    compareObjectJRadioButton.setSelected(true);
-
-                    /**
-                     * Set 'Scale Chart' menu option unchecked
-                     */
-                    scale.setSelected(false);
+                if ( !extension.equals("csv") ) {
+                    JOptionPane.showMessageDialog(null, "The chosen file is not a CSV file.", "Error!",
+                            JOptionPane.ERROR_MESSAGE);
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, loadCSVToGraphController.getLoadCSVToGraphError(), "Error!",
-                            JOptionPane.ERROR_MESSAGE);
-                    loadCSVToGraphController.cleanLoadCSVToGraphErrors();
+                    GraphData graphDataTemp = loadCSVToGraphController.loadCSVToGraph(chartViewer, path + filename);
+
+                    /**
+                     * Load graph or show errors to the user if any
+                     */
+                    if (loadCSVToGraphController.getLoadCSVToGraphError().isEmpty()) {
+                        graphData = graphDataTemp;
+                        setEntriesScrollPane(graphData.getLabels(), graphData.getGraphTableData().getEntries());
+
+                        /**
+                         * Set visibility on the interface
+                         */
+                        loadCSVButton.setVisible(false);
+                        similarityLabel.setVisible(true);
+                        similarityLabel.setOpaque(true);
+                        entriesScrollPane.setVisible(true);
+                        graphicAreaScrollPane.setVisible(true);
+                        controlPanelJPanel.setVisible(true);
+                        chartViewerJPanel.setVisible(true);
+
+                        /**
+                         * Enable 'Generate Results...' and 'Scale Chart' menu option
+                         */
+                        generate.setEnabled(true);
+                        scale.setEnabled(true);
+                        extractChart.setEnabled(true);
+
+                        /**
+                         * Set area table
+                         */
+                        String[] graphicAreaTableColumnNames = {"", "Area"};
+                        Object[][] graphicAreaTableData = {
+                                {"Reference Object", String.format("%.4f", graphData.getGraphAreaData().getReferenceArea())},
+                                {"Compare Object", String.format("%.4f", graphData.getGraphAreaData().getEntriesArea().get(0))},
+                                {"Shared", String.format("%.4f", graphData.getGraphAreaData().getCommonEntriesArea().get(0))}
+                        };
+                        JTable graphicAreaTable = new JTable(new CustomTableModel(graphicAreaTableData,
+                                graphicAreaTableColumnNames));
+                        graphicAreaTable.setRowSelectionAllowed(false);
+                        graphicAreaTable.getTableHeader().setReorderingAllowed(false);
+                        graphicAreaScrollPane.setViewportView(graphicAreaTable);
+
+                        /**
+                         * Set dimension of graphicAreaScrollPane from the dimension of the table
+                         */
+                        Dimension graphicAreaTablePreferredSize = graphicAreaTable.getPreferredSize();
+                        graphicAreaScrollPane.setPreferredSize(new Dimension(graphicAreaTablePreferredSize.width,
+                                graphicAreaTable.getRowHeight() * 4 + 5));
+                        graphicAreaScrollPane.setMinimumSize(new Dimension(graphicAreaTablePreferredSize.width,
+                                graphicAreaTable.getRowHeight() * 4 + 5));
+
+                        /**
+                         * Set similarity label
+                         */
+                        similarityLabel.setText(String.format("%.2f",
+                                graphData.getGraphAreaData().getCommonEntriesAreaPercentage().get(0)) + "%");
+
+                        /**
+                         * Set reference color row in entries table
+                         */
+                        paintEntriesTable();
+
+                        /**
+                         * Set similarity filter bar to 0
+                         */
+                        similarityFilterScrollBar.setValue(0);
+
+                        /**
+                         * Set chart axis order to 'Natural' and selector to 'Compare Object'
+                         */
+                        naturalOrderJRadioButton.setSelected(true);
+                        compareObjectJRadioButton.setSelected(true);
+
+                        /**
+                         * Set 'Scale Chart' menu option unchecked
+                         */
+                        scale.setSelected(false);
+                    } else {
+                        JOptionPane.showMessageDialog(null, loadCSVToGraphController.getLoadCSVToGraphError(), "Error!",
+                                JOptionPane.ERROR_MESSAGE);
+                        loadCSVToGraphController.cleanLoadCSVToGraphErrors();
+                    }
                 }
             }
             else if (rVal == JFileChooser.CANCEL_OPTION) {
+
+            }
+        }
+    }
+
+    private class ExtractChart implements  ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser jFileChooser = newJFileChooserWithConfirmDialog();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "png");
+            jFileChooser.setFileFilter(filter);
+            int rVal = jFileChooser.showSaveDialog(frame);
+
+            if ( rVal == JFileChooser.APPROVE_OPTION ) {
+                File imageFile = jFileChooser.getSelectedFile();
+
+                try {
+                    String imageFileAbsolutePath = imageFile.getAbsolutePath();
+                    if (!imageFileAbsolutePath.endsWith(".png")) {
+                        imageFileAbsolutePath += ".png";
+                    }
+                    extractChartController.extractChart(imageFileAbsolutePath);
+                }
+                catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, "Error saving the image", "Error!", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+            else if ( rVal == JFileChooser.CANCEL_OPTION ) {
 
             }
         }
@@ -661,39 +707,44 @@ public class UniComView {
             else if ( rVal == JFileChooser.CANCEL_OPTION ) {
 
             }
-
         }
+    }
 
-        /**
-         * Instantiates a new JFileChooser with a confirm dialog when saving a new file that already exists.
-         *
-         * @return
-         */
-        private JFileChooser newJFileChooserWithConfirmDialog() {
-            return new JFileChooser(){
-                        @Override
-                        public void approveSelection(){
-                            File f = getSelectedFile();
-                            if(f.exists() && getDialogType() == SAVE_DIALOG){
-                                int result = JOptionPane.showConfirmDialog(this,"The file exists, overwrite?",
-                                        "Existing file",JOptionPane.YES_NO_CANCEL_OPTION);
-                                switch(result){
-                                    case JOptionPane.YES_OPTION:
-                                        super.approveSelection();
-                                        return;
-                                    case JOptionPane.NO_OPTION:
-                                        return;
-                                    case JOptionPane.CLOSED_OPTION:
-                                        return;
-                                    case JOptionPane.CANCEL_OPTION:
-                                        cancelSelection();
-                                        return;
-                                }
-                            }
+    /**
+     * Instantiates a new JFileChooser with a confirm dialog when saving a new file that already exists.
+     *
+     * @return
+     */
+    private JFileChooser newJFileChooserWithConfirmDialog() {
+        return new JFileChooser(){
+            @Override
+            public void approveSelection(){
+                File f = getSelectedFile();
+
+                java.net.URL url = ClassLoader.getSystemResource("resources/icon.png");
+                Toolkit kit = Toolkit.getDefaultToolkit();
+                Image image = kit.createImage(url);
+                Icon icon = new ImageIcon(image);
+
+                if(f.exists() && getDialogType() == SAVE_DIALOG){
+                    int result = JOptionPane.showConfirmDialog(this,"The file exists, overwrite?",
+                            "Existing file",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, icon);
+                    switch(result){
+                        case JOptionPane.YES_OPTION:
                             super.approveSelection();
-                        }
-                    };
-        }
+                            return;
+                        case JOptionPane.NO_OPTION:
+                            return;
+                        case JOptionPane.CLOSED_OPTION:
+                            return;
+                        case JOptionPane.CANCEL_OPTION:
+                            cancelSelection();
+                            return;
+                    }
+                }
+                super.approveSelection();
+            }
+        };
     }
 
     private static class QuitUniCom implements ActionListener {
@@ -723,18 +774,10 @@ public class UniComView {
         }
     }
 
-    private static class AboutUniCom implements ActionListener {
+    private class AboutUniCom implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            /**
-             * Get image from resources and create icon
-             */
-            java.net.URL url = ClassLoader.getSystemResource("resources/icon.png");
-            Toolkit kit = Toolkit.getDefaultToolkit();
-            Image image = kit.createImage(url);
-            Icon icon = new ImageIcon(image);
-
             JOptionPane.showMessageDialog(null, "UniCom by Daniel Otal Rodríguez. 2016", "About",
-                    JOptionPane.INFORMATION_MESSAGE, icon);
+                    JOptionPane.INFORMATION_MESSAGE, getIcon());
         }
     }
 
@@ -805,5 +848,17 @@ public class UniComView {
         public void actionPerformed(ActionEvent e){
             paintEntriesTable();
         }
+    }
+
+    /**
+     * Gets image from resources and creates icon
+     */
+    private Icon getIcon() {
+        java.net.URL url = ClassLoader.getSystemResource("resources/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image image = kit.createImage(url);
+        Icon icon = new ImageIcon(image);
+
+        return icon;
     }
 }

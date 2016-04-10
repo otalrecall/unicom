@@ -22,6 +22,14 @@ public class LoadCSVToGraphController {
         loadCSVToGraphError = "";
     }
 
+    public MultiRadarChartService getMultiRadarChartService() {
+        return multiRadarChartService;
+    }
+
+    public GraphDataService getGraphDataService() {
+        return graphDataService;
+    }
+
     public String getLoadCSVToGraphError() {
         return loadCSVToGraphError;
     }

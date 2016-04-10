@@ -10,9 +10,9 @@ public class SetNewGraphController {
     private MultiRadarChartService multiRadarChartService;
     private GraphDataService graphDataService;
 
-    public SetNewGraphController() {
-        graphDataService = new GraphDataService();
-        multiRadarChartService = new MultiRadarChartService(graphDataService);
+    public SetNewGraphController(LoadCSVToGraphController loadCSVToGraphController) {
+        graphDataService = loadCSVToGraphController.getGraphDataService();
+        multiRadarChartService = loadCSVToGraphController.getMultiRadarChartService();
     }
 
     public void setNewGraph(ChartViewer chartViewer, GraphData graphData, boolean isNaturalChartAxisOrder,

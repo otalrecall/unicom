@@ -98,4 +98,13 @@ public class MultiRadarChartService {
 
         chartViewer.setChart(polarChart);
     }
+
+    /**
+     * Extracts the image of the chart and saves it in the directory with the path url
+     *
+     * @param url
+     */
+    public void extractImage(String url) {
+        polarChart.makeChart(url);
+    }
 }
