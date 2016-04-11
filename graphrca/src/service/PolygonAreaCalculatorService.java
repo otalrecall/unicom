@@ -22,9 +22,18 @@ public class PolygonAreaCalculatorService {
             else {
                 sideB = triangleSides[0];
             }
-            Point2D.Double pointA = new Point2D.Double(sideA, 0.);
-            Point2D.Double pointB = new Point2D.Double(sideB*Math.cos(angle), sideB*Math.sin(angle));
-            area += calculateAngleTriangle(pointA, pointB);
+
+            /**
+             * CASE: NO TRIANGLE, JUST LINE
+             */
+            if (sideB == 0.) {
+                area += sideA;
+            }
+            else {
+                Point2D.Double pointA = new Point2D.Double(sideA, 0.);
+                Point2D.Double pointB = new Point2D.Double(sideB * Math.cos(angle), sideB * Math.sin(angle));
+                area += calculateAngleTriangle(pointA, pointB);
+            }
         }
 
         return area;
@@ -108,6 +117,16 @@ public class PolygonAreaCalculatorService {
         else {
             pointB.setLocation(sideB2*Math.cos(angle), sideB2*Math.sin(angle));
             pointD.setLocation(sideA2*Math.cos(angle), sideA2*Math.sin(angle));
+        }
+
+        /**
+         * CASE: NO TRIANGLE, JUST LINE
+         */
+        if ( (sideA1 <= sideB1 && sideA2 == 0. && sideB2 == 0.) ) {
+            return sideA1;
+        }
+        else if ( (sideB1 <= sideA1 && sideB2 == 0. && sideA2 == 0.) ) {
+            return sideB1;
         }
 
         /**
