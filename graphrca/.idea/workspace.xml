@@ -8,6 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7489d312-4d0c-49b9-8566-83ba949684fa" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/CSVService.java" afterPath="$PROJECT_DIR$/src/service/CSVService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/UniComView.java" afterPath="$PROJECT_DIR$/src/view/UniComView.java" />
     </list>
     <ignored path="graphrca.iws" />
@@ -119,11 +120,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CSVService.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CSVService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/service/CSVService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-96.111115">
-              <caret line="173" column="60" selection-start-line="173" selection-start-column="60" selection-end-line="173" selection-end-column="60" />
+            <state vertical-scroll-proportion="1.7595308">
+              <caret line="134" column="59" selection-start-line="134" selection-start-column="59" selection-end-line="134" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -143,13 +144,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UniComView.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UniComView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/UniComView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4633431">
-              <caret line="467" column="51" selection-start-line="467" selection-start-column="51" selection-end-line="467" selection-end-column="51" />
+            <state vertical-scroll-proportion="2.7777777">
+              <caret line="705" column="0" selection-start-line="705" selection-start-column="0" selection-end-line="705" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#7958#8083#0" expanded="true" />
+                <element signature="e#8082#8083#0" expanded="true" />
+                <element signature="e#30677#31938#0" expanded="true" />
+                <element signature="e#31937#31938#0" expanded="true" />
                 <element signature="e#34326#34327#0" expanded="true" />
                 <element signature="e#34382#34383#0" expanded="true" />
               </folding>
@@ -208,8 +213,8 @@
         <option value="$PROJECT_DIR$/src/controller/ExtractChartController.java" />
         <option value="$PROJECT_DIR$/src/service/PolygonAreaCalculatorService.java" />
         <option value="$PROJECT_DIR$/src/model/GraphTableData.java" />
-        <option value="$PROJECT_DIR$/src/service/CSVService.java" />
         <option value="$PROJECT_DIR$/src/service/GraphDataService.java" />
+        <option value="$PROJECT_DIR$/src/service/CSVService.java" />
         <option value="$PROJECT_DIR$/src/view/UniComView.java" />
       </list>
     </option>
@@ -974,7 +979,13 @@
       <option name="project" value="LOCAL" />
       <updated>1460574325475</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Fix formats to show only decimals when needed in areas and similarity">
+      <created>1460575017755</created>
+      <option name="number" value="00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1460575017755</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1042,7 +1053,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Change chart background color, set similarity border title to center" />
     <MESSAGE value="Hide advertisement banner for ChartDirector" />
     <MESSAGE value="Add checkbox for similarity filter" />
     <MESSAGE value="Fix bug with similarity NaN with reference object 0, add feature for changing reference object" />
@@ -1067,7 +1077,8 @@
     <MESSAGE value="Add case for lines in the calculation of areas" />
     <MESSAGE value="Fix bug with empty lines in CSV and make information clearer for CSV errors" />
     <MESSAGE value="Change reference array of doubles to int as an index for the list of entries" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change reference array of doubles to int as an index for the list of entries" />
+    <MESSAGE value="Fix formats to show only decimals when needed in areas and similarity" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix formats to show only decimals when needed in areas and similarity" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1493,16 +1504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/CSVService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-96.111115">
-          <caret line="173" column="60" selection-start-line="173" selection-start-column="60" selection-end-line="173" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/GraphTableData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1520,12 +1521,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/UniComView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4633431">
-          <caret line="467" column="51" selection-start-line="467" selection-start-column="51" selection-end-line="467" selection-end-column="51" />
+        <state vertical-scroll-proportion="2.7777777">
+          <caret line="705" column="0" selection-start-line="705" selection-start-column="0" selection-end-line="705" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7958#8083#0" expanded="true" />
+            <element signature="e#8082#8083#0" expanded="true" />
+            <element signature="e#30677#31938#0" expanded="true" />
+            <element signature="e#31937#31938#0" expanded="true" />
             <element signature="e#34326#34327#0" expanded="true" />
             <element signature="e#34382#34383#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/CSVService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.7595308">
+          <caret line="134" column="59" selection-start-line="134" selection-start-column="59" selection-end-line="134" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

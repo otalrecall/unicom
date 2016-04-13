@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -94,6 +96,8 @@ public class CSVService {
     public String writeCSV(GraphData graphData) {
         String csv = "";
         String newline = System.getProperty("line.separator");
+        NumberFormat numberFormat = new DecimalFormat("##.####");
+        NumberFormat numberFormatPercentage = new DecimalFormat("##.##");
 
         List<String> labels = graphData.getLabels();
         for (int i = 0; i < labels.size(); ++i) {
@@ -108,14 +112,14 @@ public class CSVService {
         for (int i = 0; i < reference.size(); ++i) {
             csv += reference.get(i) + ";";
         }
-        csv += String.format( "%.4f", graphData.getGraphAreaData().getReferenceArea() ) + ";" +
-                String.format( "%.4f", graphData.getGraphAreaData().getReferenceArea() ) + ";100;" +
-                String.format( "%.4f", graphData.getGraphAreaDataScaled().getReferenceArea() ) + ";" +
-                String.format( "%.4f", graphData.getGraphAreaDataScaled().getReferenceArea() )  + ";100;" +
-                String.format( "%.4f", graphData.getGraphAreaDataOwa().getReferenceArea() ) + ";" +
-                String.format( "%.4f", graphData.getGraphAreaDataOwa().getReferenceArea() ) + ";100;" +
-                String.format( "%.4f", graphData.getGraphAreaDataScaledOwa().getReferenceArea() ) + ";" +
-                String.format( "%.4f", graphData.getGraphAreaDataScaledOwa().getReferenceArea() ) + ";100" + newline;
+        csv += numberFormat.format( graphData.getGraphAreaData().getReferenceArea() ) + ";" +
+                numberFormat.format( graphData.getGraphAreaData().getReferenceArea() ) + ";100;" +
+                numberFormat.format( graphData.getGraphAreaDataScaled().getReferenceArea() ) + ";" +
+                numberFormat.format( graphData.getGraphAreaDataScaled().getReferenceArea() )  + ";100;" +
+                numberFormat.format( graphData.getGraphAreaDataOwa().getReferenceArea() ) + ";" +
+                numberFormat.format( graphData.getGraphAreaDataOwa().getReferenceArea() ) + ";100;" +
+                numberFormat.format( graphData.getGraphAreaDataScaledOwa().getReferenceArea() ) + ";" +
+                numberFormat.format( graphData.getGraphAreaDataScaledOwa().getReferenceArea() ) + ";100" + newline;
 
         csv += newline;
 
@@ -124,18 +128,18 @@ public class CSVService {
             for (int j = 0; j < entries.get(i).size(); ++j) {
                 csv += entries.get(i).get(j) + ";";
             }
-            csv += String.format( "%.4f", graphData.getGraphAreaData().getEntriesArea().get(i) ) + ";" +
-                    String.format( "%.4f", graphData.getGraphAreaData().getCommonEntriesArea().get(i) ) + ";" +
-                    String.format( "%.2f", graphData.getGraphAreaData().getCommonEntriesAreaPercentage().get(i) ) + ";" +
-                    String.format( "%.4f", graphData.getGraphAreaDataScaled().getEntriesArea().get(i) ) + ";" +
-                    String.format( "%.4f", graphData.getGraphAreaDataScaled().getCommonEntriesArea().get(i) ) + ";" +
-                    String.format( "%.2f", graphData.getGraphAreaDataScaled().getCommonEntriesAreaPercentage().get(i) ) + ";" +
-                    String.format( "%.4f", graphData.getGraphAreaDataOwa().getEntriesArea().get(i) ) + ";" +
-                    String.format( "%.4f", graphData.getGraphAreaDataOwa().getCommonEntriesArea().get(i) ) + ";" +
-                    String.format( "%.2f", graphData.getGraphAreaDataOwa().getCommonEntriesAreaPercentage().get(i) ) + ";" +
-                    String.format( "%.4f", graphData.getGraphAreaDataScaledOwa().getEntriesArea().get(i) ) + ";" +
-                    String.format( "%.4f", graphData.getGraphAreaDataScaledOwa().getCommonEntriesArea().get(i) ) + ";" +
-                    String.format( "%.2f", graphData.getGraphAreaDataScaledOwa().getCommonEntriesAreaPercentage().get(i) ) +
+            csv += numberFormat.format( graphData.getGraphAreaData().getEntriesArea().get(i) ) + ";" +
+                    numberFormat.format( graphData.getGraphAreaData().getCommonEntriesArea().get(i) ) + ";" +
+                    numberFormatPercentage.format( graphData.getGraphAreaData().getCommonEntriesAreaPercentage().get(i) ) + ";" +
+                    numberFormat.format( graphData.getGraphAreaDataScaled().getEntriesArea().get(i) ) + ";" +
+                    numberFormat.format( graphData.getGraphAreaDataScaled().getCommonEntriesArea().get(i) ) + ";" +
+                    numberFormatPercentage.format( graphData.getGraphAreaDataScaled().getCommonEntriesAreaPercentage().get(i) ) + ";" +
+                    numberFormat.format( graphData.getGraphAreaDataOwa().getEntriesArea().get(i) ) + ";" +
+                    numberFormat.format( graphData.getGraphAreaDataOwa().getCommonEntriesArea().get(i) ) + ";" +
+                    numberFormatPercentage.format( graphData.getGraphAreaDataOwa().getCommonEntriesAreaPercentage().get(i) ) + ";" +
+                    numberFormat.format( graphData.getGraphAreaDataScaledOwa().getEntriesArea().get(i) ) + ";" +
+                    numberFormat.format( graphData.getGraphAreaDataScaledOwa().getCommonEntriesArea().get(i) ) + ";" +
+                    numberFormatPercentage.format( graphData.getGraphAreaDataScaledOwa().getCommonEntriesAreaPercentage().get(i) ) +
                     newline;
         }
 
