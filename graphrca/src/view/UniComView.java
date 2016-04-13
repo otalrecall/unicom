@@ -461,10 +461,11 @@ public class UniComView {
                 commonEntryArea = graphData.getGraphAreaDataScaled().getCommonEntriesArea().get(entryId);
             }
         }
+        NumberFormat numberFormatArea = new DecimalFormat("##.####");
         Object[][] graphicAreaTableData = {
-                {"Reference Object", String.format("%.4f", referenceArea)},
-                {"Compare Object", String.format("%.4f", entryArea)},
-                {"Shared", String.format("%.4f", commonEntryArea)}
+                {"Reference Object", numberFormatArea.format(referenceArea)},
+                {"Compare Object", numberFormatArea.format(entryArea)},
+                {"Shared", numberFormatArea.format(commonEntryArea)}
         };
 
         JTable graphicAreaTable = (JTable) graphicAreaScrollPane.getViewport().getView();
@@ -492,7 +493,8 @@ public class UniComView {
                 similarity = graphData.getGraphAreaDataScaled().getCommonEntriesAreaPercentage().get(entryId);
             }
         }
-        similarityLabel.setText( String.format("%.2f", similarity) + "%" );
+        NumberFormat numberFormatSimilarity = new DecimalFormat("##.##");
+        similarityLabel.setText(numberFormatSimilarity.format(similarity) + "%" );
     }
 
     private class CustomTableModel extends AbstractTableModel {
@@ -590,11 +592,12 @@ public class UniComView {
                         /**
                          * Set area table
                          */
+                        NumberFormat numberFormatArea = new DecimalFormat("##.####");
                         String[] graphicAreaTableColumnNames = {"", "Area"};
                         Object[][] graphicAreaTableData = {
-                                {"Reference Object", String.format("%.4f", graphData.getGraphAreaData().getReferenceArea())},
-                                {"Compare Object", String.format("%.4f", graphData.getGraphAreaData().getEntriesArea().get(0))},
-                                {"Shared", String.format("%.4f", graphData.getGraphAreaData().getCommonEntriesArea().get(0))}
+                                {"Reference Object", numberFormatArea.format(graphData.getGraphAreaData().getReferenceArea())},
+                                {"Compare Object", numberFormatArea.format(graphData.getGraphAreaData().getEntriesArea().get(0))},
+                                {"Shared", numberFormatArea.format(graphData.getGraphAreaData().getCommonEntriesArea().get(0))}
                         };
                         JTable graphicAreaTable = new JTable(new CustomTableModel(graphicAreaTableData,
                                 graphicAreaTableColumnNames));
@@ -614,7 +617,8 @@ public class UniComView {
                         /**
                          * Set similarity label
                          */
-                        similarityLabel.setText(String.format("%.2f",
+                    NumberFormat numberFormatSimilarity = new DecimalFormat("##.##");
+                        similarityLabel.setText(numberFormatSimilarity.format(
                                 graphData.getGraphAreaData().getCommonEntriesAreaPercentage().get(0)) + "%");
 
                         /**
