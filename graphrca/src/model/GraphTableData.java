@@ -4,20 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GraphTableData {
-    private List<Double> reference;
+    private int referenceIndex;
     private List<List<Double>> entries;
 
     public GraphTableData() {
-        reference = new ArrayList<>();
         entries = new ArrayList<>();
     }
 
-    public List<Double> getReference() {
-        return reference;
+    public int getReferenceIndex() {
+        return referenceIndex;
     }
 
-    public void setReference(List<Double> reference) {
-        this.reference = reference;
+    public List<Double> getReference() {
+        return entries.get(referenceIndex);
+    }
+
+    public void setReferenceIndex(int referenceIndex) {
+        this.referenceIndex = referenceIndex;
     }
 
     public List<List<Double>> getEntries() {
@@ -34,6 +37,7 @@ public class GraphTableData {
      * @return
      */
     public double[] getReferenceToDouble() {
+        List<Double> reference = getReference();
         double[] referenceDouble = new double[reference.size()];
         for (int i = 0; i < referenceDouble.length; i++) {
             referenceDouble[i] = reference.get(i);
@@ -53,14 +57,5 @@ public class GraphTableData {
             entry[i] = entries.get(entryId).get(i);
         }
         return entry;
-    }
-
-    /**
-     * Gets the position of the reference in the entries list
-     *
-     * @return
-     */
-    public int getReferenceIndex() {
-        return entries.indexOf(reference);
     }
 }

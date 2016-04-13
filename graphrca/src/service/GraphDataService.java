@@ -145,7 +145,7 @@ public class GraphDataService {
             }
 
             graphData.getGraphTableDataScaled().setEntries( entriesScaledList );
-            graphData.getGraphTableDataScaled().setReference( entriesScaledList.get(0) );
+            graphData.getGraphTableDataScaled().setReferenceIndex( 0 );
         }
     }
 
@@ -156,11 +156,9 @@ public class GraphDataService {
      * @param entryId
      */
     public void changeReferenceObject(GraphData graphData, int entryId) {
-        List<Double> newReference = graphData.getGraphTableData().getEntries().get(entryId);
-        List<Double> newReferenceScaled = graphData.getGraphTableDataScaled().getEntries().get(entryId);
-        if ( newReference != graphData.getGraphTableData().getReference() ) {
-            graphData.getGraphTableData().setReference( newReference );
-            graphData.getGraphTableDataScaled().setReference( newReferenceScaled );
+        if ( entryId != graphData.getGraphTableData().getReferenceIndex() ) {
+            graphData.getGraphTableData().setReferenceIndex( entryId );
+            graphData.getGraphTableDataScaled().setReferenceIndex( entryId );
 
             calculateOwaOrder( graphData );
 

@@ -170,7 +170,7 @@ public class CSVService {
                 entries.add(entry);
             }
         }
-        graphData.getGraphTableData().setReference( entries.get(0) );
+        graphData.getGraphTableData().setReferenceIndex( 0 );
         graphData.getGraphTableData().setEntries( entries );
 
         return graphData;
