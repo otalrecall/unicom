@@ -27,6 +27,7 @@ public class CSVService {
         String line = "";
         String csvSplitBy = ";";
         List<List<String>> entries = new ArrayList<>();
+        int labelsNumber = 0;
 
         try {
             br = new BufferedReader( new FileReader(path) );
@@ -38,13 +39,29 @@ public class CSVService {
                         throw new Exception("Not enough data. Objects must have more than one comparable attribute.");
                     }
                     checkFormat(entry, EntryType.LABEL_TYPE);
+                    labelsNumber = entry.size();
 
                 } else {
                     checkFormat(entry, EntryType.NUMERIC_TYPE);
+
+                    if( labelsNumber != entry.size()) {
+                        /**
+                         * If it is not a white line, throws exception
+                         */
+                        if ( !(entry.size() == 1 && entry.get(0).isEmpty()) ) {
+                            throw new Exception("Not enough data. Objects must have the same number of attributes than " +
+                                    "the number of labels defined.");
+                        }
+                    }
                 }
 
-                if (entry.size() > 0 ) {
-                    entries.add(entry);
+                if ( entry.size() > 0 ) {
+                    /**
+                     * If it is not a white line, adds the entry
+                     */
+                    if ( !(entry.size() == 1 && entry.get(0).isEmpty()) ) {
+                        entries.add(entry);
+                    }
                 }
                 ++lineCounter;
             }
