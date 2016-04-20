@@ -366,17 +366,6 @@ public class UniComView {
         setNewGraphController.changeReferenceObject(graphData, row);
 
         /**
-         * Reset similarity filter
-         */
-        similarityFilterScrollBar.setValue(0);
-        similarityFilterJCheckBox.setSelected(false);
-
-        /**
-         * Reset chart axis order
-         */
-        naturalOrderJRadioButton.setSelected(true);
-
-        /**
          * Repaint table
          */
         paintEntriesTable();
