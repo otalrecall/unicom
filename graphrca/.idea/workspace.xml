@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7489d312-4d0c-49b9-8566-83ba949684fa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/manual.pdf" afterPath="$PROJECT_DIR$/src/resources/manual.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graphrca/service/PolygonAreaCalculatorService.class" afterPath="$PROJECT_DIR$/out/production/graphrca/service/PolygonAreaCalculatorService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/PolygonAreaCalculatorService.java" afterPath="$PROJECT_DIR$/src/service/PolygonAreaCalculatorService.java" />
     </list>
     <ignored path="graphrca.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PolygonAreaCalculatorService.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PolygonAreaCalculatorService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/service/PolygonAreaCalculatorService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="62" column="43" selection-start-line="62" selection-start-column="43" selection-end-line="62" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.37251654">
+              <caret line="128" column="26" selection-start-line="128" selection-start-column="26" selection-end-line="128" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -149,10 +150,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UniComView.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UniComView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/view/UniComView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.92391306">
+            <state vertical-scroll-proportion="0.0">
               <caret line="791" column="9" selection-start-line="791" selection-start-column="9" selection-end-line="791" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -213,8 +214,8 @@
         <option value="$PROJECT_DIR$/src/service/MultiRadarChartService.java" />
         <option value="$PROJECT_DIR$/src/service/CSVService.java" />
         <option value="$PROJECT_DIR$/src/controller/LoadCSVToGraphController.java" />
-        <option value="$PROJECT_DIR$/src/service/PolygonAreaCalculatorService.java" />
         <option value="$PROJECT_DIR$/src/view/UniComView.java" />
+        <option value="$PROJECT_DIR$/src/service/PolygonAreaCalculatorService.java" />
       </list>
     </option>
   </component>
@@ -249,6 +250,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -414,7 +416,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -996,7 +997,13 @@
       <option name="project" value="LOCAL" />
       <updated>1461180001653</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Update manual">
+      <created>1461244492149</created>
+      <option name="number" value="00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1461244492149</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1005,12 +1012,10 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32594937" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38249594" sideWeight="0.5062598" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37341774" sideWeight="0.49374023" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26485148" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1018,14 +1023,16 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3971519" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32594937" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37341774" sideWeight="0.49374023" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920793" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32594937" sideWeight="0.49374023" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3971519" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1073,7 +1080,6 @@
     <MESSAGE value="Add Scaled Chart option, delete ordered owa results (are all the same)" />
     <MESSAGE value="Fix bug with the labels in the 'Generate Results' option menu" />
     <MESSAGE value="Fix grammar error for 'axes'" />
-    <MESSAGE value="Update manual" />
     <MESSAGE value="Rename UniCom view" />
     <MESSAGE value="Fix bug with index out of bounds" />
     <MESSAGE value="Delete unnecessary imports, change method to private" />
@@ -1089,7 +1095,8 @@
     <MESSAGE value="Fix formats to show only decimals when needed in areas and similarity" />
     <MESSAGE value="Format correctly the results of Generate Results" />
     <MESSAGE value="Change resetting of order and similarity filter when changing reference object" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change resetting of order and similarity filter when changing reference object" />
+    <MESSAGE value="Update manual" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update manual" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1528,8 +1535,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/service/PolygonAreaCalculatorService.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37251654">
+          <caret line="128" column="26" selection-start-line="128" selection-start-column="26" selection-end-line="128" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="43" selection-start-line="62" selection-start-column="43" selection-end-line="62" selection-end-column="43" />
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1564,17 +1579,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/UniComView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.92391306">
+        <state vertical-scroll-proportion="0.0">
           <caret line="791" column="9" selection-start-line="791" selection-start-column="9" selection-end-line="791" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />

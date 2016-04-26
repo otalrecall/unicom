@@ -122,10 +122,10 @@ public class PolygonAreaCalculatorService {
         /**
          * CASE: NO TRIANGLE, JUST LINE
          */
-        if ( (sideA1 <= sideB1 && sideA2 == 0. && sideB2 == 0.) ) {
+        if ( (sideA1 <= sideB1 && (sideA2 == 0. || sideB2 == 0.)) ) {
             return sideA1;
         }
-        else if ( (sideB1 <= sideA1 && sideB2 == 0. && sideA2 == 0.) ) {
+        else if ( (sideB1 <= sideA1 && (sideB2 == 0. || sideA2 == 0.)) ) {
             return sideB1;
         }
 
